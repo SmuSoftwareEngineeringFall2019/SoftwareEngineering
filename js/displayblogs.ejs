@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>All Blogs</title>
+</head>
+<body>
+<h1>This is the blogs page</h1>
+
+<% blogsVar.forEach(function(blog){ %>
+
+<h3><%=blog.title%></h3>
+<small><%=blog.date%></small>
+<p>
+    <%=blog.body%>
+</p>
+<br>
+
+<%});%>
+
+</body>
+</html>
