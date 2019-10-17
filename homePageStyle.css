@@ -43,7 +43,7 @@ header nav {
 /*------------------------IMAGE UNDER THE HEADER--------------------*/
 #blogHeader {
   min-height: 400px;
-  background: url('../Mike/Mikes Media/blogHeader.jpg') no-repeat;
+  background: url('Mikes Media/blogHeader.jpg') no-repeat;
   background-size: cover;
 
 
