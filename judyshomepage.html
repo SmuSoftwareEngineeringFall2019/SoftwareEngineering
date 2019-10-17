@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Judy's | Homepage</title>
+</head>
+
+<!--- responsive webpage requires, viewport, content attribute -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap-responsive.css">
+
+<meta name="description" content="Blog Site for Judy">
+<meta name="keywords" content="web design, Judy's webpage, blog">
+<meta name="author" content="Judy">
+
+<link rel="stylesheet"  type = "text/css" href = "jhomePageStyle.css" />
+
+<!-- JS --->
+<script type="text/javascript" src="../Judy/js/postCreator.js"></script>
+
+<link
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<body onload="loadPostsOnPage()">
+<header>
+
+
+
+  <div class= "container">
+    <div id="homepage">
+    <!--  <input type="file" id="JudysBlog"> -->
+      <!-- add id "btnBlogs when you know how to code the js" -->
+      <h1 style="margin: 8px 0 0 25px"><button class="button blogBtn" >blogs |</button></h1>
+
+    </div>
+
+    </div>
+  </header>
+  <!---  the image after the nav bar -->
+  <section id="blogHeader">
+    <div class="container">
+      <h1><center><img src="../Judy's Media/judyLogo.png" align="middle"></center></h1>
+      <p></p>
+    </div>
+  </section>
+  <!-- end image after nav -->
+  <div class="search-box">
+    <input class="search-txt" type="text" name="" placeholder="Search for Blogs...">
+    <a class= "search-btn" href="#"></a>
+    <i id="searchIcon" class="fa fa-search" style="font-size: 1.60em; transform: translate(135%, 30%); color: white"></i>
+
+  </div>
+
+  <!---START DISPLAYING BLOGS HERE ---------------------------------->
+      <div class="content pure-u-1 pure-u-md-3-4">
+        <div class="posts" id="posts">
+          <!-- this is the space filled byloadPostsOnPage() -->
+        </div>
+      </div>
+
+
+  <!---END DISPLAY BLOGS HERE----------------------------->
+
+</body>
+</html>
