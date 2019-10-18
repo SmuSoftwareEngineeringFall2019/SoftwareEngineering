@@ -34,7 +34,7 @@ app.get("/", function(req, res) {
    testV2.ejs, as blogsVar. So now blogsVar can be used in the ejs file.
 */
 app.get(route, function(req, res) {
-    blog.find({}, function(err, blogs) {
+    blog.find({author: "Michael"}, function(err, blogs) {
         if (err) {
             console.log(err);
         } else {
@@ -56,10 +56,10 @@ app.get("/create", function(req, res) {
    contains all the blogs.
 */
 app.post("/create/new", function(req, res) {
-    var date = req.body.date;
+    var author = req.body.author;
     var title = req.body.title;
     var body = req.body.body;
-    var newBlog = { date: date, title: title, body: body };
+    var newBlog = { author: author, title: title, body: body };
     blog.create(newBlog, function(err, newlyCreated) {
         if (err) {
             console.log(err);
@@ -77,7 +77,7 @@ mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: 
    testing. Will probably experiment with images before I add them here. 
 */
 var blogSchema = new mongoose.Schema({
-    date: String,
+    author: String,
     title: String,
     body: String
 });
