@@ -184,3 +184,29 @@ header nav {
   font-family: "Courier New";
 }
 /*-----------------END SEARCH BUTTON----------------------------*/
+
+/*-----------------------POST DISPLAY---------------------------*/
+.post-header {
+  background: black;
+  color: white;
+  padding-top: 30px;
+  padding-bottom: 0px;
+  min-height: 70px;
+  margin: 20px -20px 40px -10px;
+}
+
+.post-description {
+  padding-left: 50px;
+}
+
+/*-----------------END POST DISPLAY-----------------------------*/
+
+/*-----------------LAUNCHER STYLE-------------------------------*/
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+/*-----------------END LAUNCHER STYLE---------------------------*/

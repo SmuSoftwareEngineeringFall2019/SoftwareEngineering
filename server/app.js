@@ -14,23 +14,24 @@ var connectionString = 'mongodb://' + user + ':' + password + '@' + host +
     ':' + port + '/' + database;
 
 /* This is the route that takes the user to the page where all the blogs are
-   displayed. I created a variable for it, so we can easily change it in the 
+   displayed. I created a variable for it, so we can easily change it in the
    future.
 */
 var route = "/blogs";
+var route2 = "/jblogs"
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public")); 
+app.use(express.static("public"));
 app.engine('html', require('ejs').renderFile);
 
 
 //Just added this to see if the server is working
 app.get("/", function(req, res) {
-    res.render("mikeLanding.html");
+    res.render("launcher.html");
 });
 
-/* Retrieves all the blogs from the database, then sends that blogs object to
+/* Retrieves all the Michael blogs from the database, then sends that blogs object to
    testV2.ejs, as blogsVar. So now blogsVar can be used in the ejs file.
 */
 app.get(route, function(req, res) {
@@ -39,6 +40,19 @@ app.get(route, function(req, res) {
             console.log(err);
         } else {
             res.render("mikesHomePage", { blogsVar: blogs });
+        }
+    });
+});
+
+/* Retrieves all the Judy blogs from the database, then sends that blogs object to
+   testV2.ejs, as blogsVar. So now blogsVar can be used in the ejs file.
+*/
+app.get(route2, function(req, res) {
+    blog.find({author: "Judy"}, function(err, blogs) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("judysHomePage", { blogsVar: blogs });
         }
     });
 });
@@ -52,7 +66,7 @@ app.get("/create", function(req, res) {
 
 /* This is the post request that's used in the form. Gets the date, title, and
    body, then combines those in the form of a JSON object in the var newBlog.
-   If the blog is successfuly created, it redirects them to the page that 
+   If the blog is successfuly created, it redirects them to the page that
    contains all the blogs.
 */
 app.post("/create/new", function(req, res) {
@@ -74,7 +88,7 @@ app.post("/create/new", function(req, res) {
 mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 
 /* A blog schema, for now I just included date, title, and body just for
-   testing. Will probably experiment with images before I add them here. 
+   testing. Will probably experiment with images before I add them here.
 */
 var blogSchema = new mongoose.Schema({
     author: String,
