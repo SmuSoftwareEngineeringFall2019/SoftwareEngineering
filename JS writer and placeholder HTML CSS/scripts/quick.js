@@ -1,10 +1,10 @@
 /** 
  * TODO 
  * Change from local storage
- * fix bugs for middle text editing (quick highlight wont plus backspace wont delte)
  * end of line and new characterto go on next line
  * cursor position after undo/redo.
- * visual cursor doesnt follow backspace button (reapplying focus puts cursor at end)
+ * JUDY WITH ONLY TOP BUTTONS TO WORK WITH KEYBOARD
+ * http://ugdev.cs.smu.ca:3000/create
  * 
  * 
  * Author: Jacob Vincent (A00419169)
@@ -124,9 +124,11 @@ document.getElementById(focus).focus();
     if (start === end) {
         start++;
         end++;
+        document.getElementById(focus).setSelectionRange(start, end);
     } else {
         start++;
         end = start;
+        document.getElementById(focus).setSelectionRange(start, end);
     }
 
     if (focus === "userText") {
@@ -137,8 +139,7 @@ document.getElementById(focus).focus();
 //Backspace/delete highlighted text with respect to cursor position
 function del() {
     document.getElementById(focus).focus();
-    curs.selectionStart = start;
-    curs.selectionEnd = end;
+
     var curString = document.getElementById(focus).value;
 
     if (start === end) {
@@ -147,12 +148,14 @@ function del() {
                 + curString.substring(end, curString.length);
         start--;
         end--;
+        document.getElementById(focus).setSelectionRange(start, end);
     } else {
 
         document.getElementById(focus).value =
                 curString.substring(0, start) 
                 + curString.substring(end, curString.length);
         end = start;
+        document.getElementById(focus).setSelectionRange(start, end);
     }
 
     if (focus === "userText") {
@@ -167,6 +170,7 @@ function undo() {
         var lastText = oldStack.pop();
         currentStack.push(lastText);
         document.getElementById("userText").value = lastText;
+        getCursor();
     }
 }
 
@@ -177,6 +181,7 @@ function redo() {
         oldStack.push(currentStack.pop());
         document.getElementById("userText").value = 
                 currentStack[currentStack.length - 1];
+         getCursor();
     }
 }
 
@@ -226,10 +231,10 @@ function getCursor() {
 function publish() {
     var title = document.getElementById("userTitle").value;
     var body = document.getElementById("userText").value;
-    var time = new Date();
-    var date = time.getFullYear() + "." + (time.getMonth() + 1) + "." + time.getDate();
+    var time = Date.now();
+   
 //add any new fields to contents
-    var contents = {"title": title, "body": body, "date": date};
+    var contents = {"title": title, "body": body, "date": time};
 
 //WILL CHANGE FROM LOCAL
     localStorage.setItem(title, JSON.stringify(contents));
