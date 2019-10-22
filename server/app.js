@@ -78,7 +78,13 @@ app.post("/create/new", function(req, res) {
         if (err) {
             console.log(err);
         } else {
+          if (author == "Michael") {
             res.redirect(route);
+          } else if (author == "Judy") {
+            res.redirect(route2);
+          } else {
+            res.redirect("/");
+          }
         }
     })
 });
