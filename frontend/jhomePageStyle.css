@@ -1,4 +1,4 @@
-/*Home Page Style Sheet*/
+/*Home Page Style Sheet for Judi*/
 
 body {
 }
@@ -41,20 +41,25 @@ header nav {
 
 
 /*------------------------IMAGE UNDER THE HEADER--------------------*/
+#blogHeader {
+  transform: translateY(-40px);
+  padding: 10px 0 0 10px;
+  background: url('judy media/judyLogo.png') no-repeat;
+}
+
 #blogBackground {
-  transform:translateY(-20%);
  /* min-height: 400px;*/
-  background: url('..\github\judy\judysbackground.jpg) no-repeat;
-  background-size: 200px;
-  margin: -20px -20px 30px -20px;
-  box-shadow: 10px 10px 5px #ccc;
+  background: url('judy media/judysbackground.jpg') no-repeat;
+	transform: translateY(-120px);
+	margin: 0 0 10px 0;
+}
+ 
 }
 /* ----------END IMAGE UNDER HEADER--------------------------------------*/
 
   /*----------------------Enter Button Styled-----------------------------*/
   .enterBtn {
     position: relative;
-
   }
   .enterBtn .btn {
 
@@ -99,7 +104,7 @@ header nav {
       width: 100%;
       min-width: 50px;
 }
-/*--------------------END FONT STYLE ENTER BUtTON --------------*/
+/*--------------------END FONT STYLE ENTER BUTTON --------------*/
 
 /*--------------------BLOG TEXT BUTTON --------------*/
 .button {
@@ -182,3 +187,100 @@ header nav {
   font-family: "Courier New";
 }
 /*-----------------END SEARCH BUTTON----------------------------*/
+
+/*------------------BEGIN BLOG POSTS----------------------------*/
+.post-slider {
+
+  position: relative; /*this is to help position the next and prev icons*/
+}
+
+/*Edit tile in post slider*/
+.post-slider .slider-title {
+  text-align: center;
+  margin: 30px auto;
+  font-family: Courier;
+  color: black;
+	transform: translateY(-70%)
+}
+/*Edit icons, they are also in the post-slider*/
+.post-slider .next {
+  /*we want the icon to be about 50% south of the slider itself*/
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  font-size: 2em;
+  color: #AC0C0C;
+  cursor: pointer;
+
+}
+.post-slider .prev {
+  /*we want the icon to be about 50% south of the slider itself*/
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  font-size: 2em;
+  color: #AC0C0C;
+  cursor: pointer; /*when user hovers over the button, the pointer will change to
+  indicate that the button is clickable*/
+}
+
+.post-slider .post-wrapper {
+  padding: 10px 0px 10px 0px;
+  width: 84%;
+  height: 350px;
+  margin: 0px auto; /*the auto makes sure it is centered horizontally*/
+
+  overflow: hidden; /*if there is overflow outside of the parent
+   container post slider, hide it.*/
+}
+/*style each post/blog that is inside the post wrapper*/
+.post-slider .post-wrapper .posts {
+  /*lets give the blogs a background color*/
+  background-color: #f2f0eb;
+  /* We want to display them horizontally, so lets do that*/
+  display: inline-block;
+  /*lets increase the width and height*/
+  width:300px;
+  height: 330px;
+  margin: 0px 10px; /* seperated the blogs to there is some space between them*/
+  border-radius: 5px; /*round edges*/
+  box-shadow: 1rem 1rem 1rem -1rem #a0a0a033;
+}
+/* you need to add sme padding to the blog paragraph */
+.post-slider .post-wrapper .posts .post-description {
+  height: 130px;
+  padding: 0px 5px;
+}
+/*turn text red when users hover over paragraph text to indicate it can be click*/
+.page-wrapper p:hover {
+  color:#AC0C0C;
+  cursor: pointer;
+}
+
+/* ---------END SLIDER FOR BLOGS--------------------------------------*/
+/*-----------------------ACTUAL BLOG POST STYLING---------------------------*/
+.post-header {
+  background: white;
+  color: black;
+  font-family: 'Courier New';
+  text-align: center; /*center blog titles*/
+  padding-top: 30px;
+  padding-bottom: 0px;
+  min-height: 70px;
+  margin: 20px -20px 40px -10px;
+}
+
+.post-description {
+  padding-left: 50px;
+  text-align: center;
+  color: black;
+  font-family: 'Calibri';
+}
+
+.posts .post-title {
+  color: black;
+  font-family: 'Courier New';
+  text-align: center;
+}
+
+/*-----------------END BLOG POST STYLING DISPLAY-----------------------------*/
