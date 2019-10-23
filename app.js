@@ -105,7 +105,7 @@ var blogSchema = new mongoose.Schema({
    in the server, there's a collection called "blogs" now. We'll probably need
    one of these for each user, so they have seperate collections.
 */
-var blog = mongoose.model("prototypeTest1.1", blogSchema);
+var blog = mongoose.model("prototypeTest2", blogSchema);
 
 
 
