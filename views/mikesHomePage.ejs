@@ -15,48 +15,23 @@
   <meta name="author" content="Mike">
 
   <!-- JS -->
-  <link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="scripts/jquery-1.8.3.min.js"></script>
+
   <!--Post Slider-->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <script src="scripts/jquery-1.8.3.min.js"></script>
+  <script language="JavaScript" type="text/javascript" src="/scripts/slider.js"></script>
   <!--CSS-->
-  <link rel="stylesheet" type="text/css" href="css/homePageStyle.css" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/homePageStyle.css">
   <!--Font Awesome(for icons)--->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+
   <!--INLINE JAVASCRIPT FOR SLIDER----->
-  <script>
-    $('.post-wrapper').slick({ // the class here refers to the div class that contains the blog.
-      centerMode: true,
-      centerPadding: '60px',
-      slidesToShow: 3,
-      responsive: [{
-          breakpoint: 768,
-          settings: {
-            arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 3
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            nextArrow: $('.next'),
-            /*replaces the previous and next button with font awesome icons*/
-            prevArrow: $('.prev'),
-            slidesToShow: 1
-          }
-        }
-      ]
-    });
-  </script>
+
 
   <!---END INLINE JAVASCRIPT-------->
 </head>
@@ -108,32 +83,36 @@
       <!--here next will be used in the css file to style it.-->
       <!---The Slider--------------->
       <!--This is where you will call the blogs to be displayed -->
-      <div class="post-wrapper">
-        <!--this is the class called in the inline js above---->
+      <center>
+        <div class="post-wrapper">
+          <!--this is the class called in the inline js above---->
 
-        <!---insert blog div here--->
-        <div class="posts" id="posts">
+
+          <!---insert blog div here--->
           <% blogsVar.forEach(function(blog){ %>
-            <section class="post">
-              <header class="post-header">
-                <h2 class="post-title">
-                                  <%=blog.title%>
-                              </h2>
-              </header>
-              <div class="post-description">
-                <!----When the user clicks the paragraph (or maybe a
-                             button beneath the paragraphthe box will expand with the
-                            full blog on the same page, so we need an onclick javascript
-                            function for the paragraph that will retrieve the full blog from the server
-                            ------------------->
-                <p>
-                  <%=blog.body%>
-                </p>
-              </div>
-            </section>
+            <div class="posts" id="posts">
+              <section class="post">
+                <header class="post-header">
+                  <h2 class="post-title">
+                                    <%=blog.title%>
+                                </h2>
+                </header>
+                <div class="post-description">
+                  <!----When the user clicks the paragraph (or maybe a
+                               button beneath the paragraphthe box will expand with the
+                              full blog on the same page, so we need an onclick javascript
+                              function for the paragraph that will retrieve the full blog from the server
+                              ------------------->
+                  <p>
+                    <%=blog.body%>
+                  </p>
+                </div>
+              </section>
+            </div>
             <%});%>
+
         </div>
-      </div>
+      </center>
     </div>
     <!---End Slider--------------->
 

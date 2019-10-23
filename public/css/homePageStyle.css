@@ -223,8 +223,9 @@ header nav {
 /*-----------------SEARCH BUTTON----------------------------*/
 .search-box {
   position: absolute;
-  top:2%;
-  right: 1%;
+  top:50%;
+  right: 50%;
+  transform: translate(900px, -450px);
   background: black;
   height: 40px;
   border-radius: 47px;

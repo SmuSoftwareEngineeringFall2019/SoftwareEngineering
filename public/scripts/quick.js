@@ -234,7 +234,6 @@ function publish() {
     author =  encodeURIComponent(author);
 
     if (author != 'Judi' && author != "Michael") {
-      alert("Invalid author");
       return;
     }
 
@@ -246,5 +245,4 @@ function publish() {
     xhttp.open('POST', '/create/new', true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send(data);
-    alert("Sucessful Posted");
 }

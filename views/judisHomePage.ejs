@@ -103,6 +103,10 @@
 
 
   <!---END DISPLAY BLOGS HERE----------------------------->
+  <!---START DISPLAYING BLOGS HERE ---------------------------------->
+
+  <!---END DISPLAY BLOGS HERE----------------------------->
+
   <!---Page Wrapper--------------->
   <div class="page-wrapper">
     <!---Post Slider-------------->
@@ -115,32 +119,36 @@
       <!--here next will be used in the css file to style it.-->
       <!---The Slider--------------->
       <!--This is where you will call the blogs to be displayed -->
-      <div class="post-wrapper">
-        <!--this is the class called in the inline js above---->
+      <center>
+        <div class="post-wrapper">
+          <!--this is the class called in the inline js above---->
 
-        <!---insert blog div here--->
-        <div class="posts" id="posts">
+
+          <!---insert blog div here--->
           <% blogsVar.forEach(function(blog){ %>
-            <section class="post">
-              <header class="post-header">
-                <h2 class="post-title">
-                                  <%=blog.title%>
-                              </h2>
-              </header>
-              <div class="post-description">
-                <!----When the user clicks the paragraph (or maybe a
-                             button beneath the paragraphthe box will expand with the
-                            full blog on the same page, so we need an onclick javascript
-                            function for the paragraph that will retrieve the full blog from the server
-                            ------------------->
-                <p>
-                  <%=blog.body%>
-                </p>
-              </div>
-            </section>
+            <div class="posts" id="posts">
+              <section class="post">
+                <header class="post-header">
+                  <h2 class="post-title">
+                                    <%=blog.title%>
+                                </h2>
+                </header>
+                <div class="post-description">
+                  <!----When the user clicks the paragraph (or maybe a
+                               button beneath the paragraphthe box will expand with the
+                              full blog on the same page, so we need an onclick javascript
+                              function for the paragraph that will retrieve the full blog from the server
+                              ------------------->
+                  <p>
+                    <%=blog.body%>
+                  </p>
+                </div>
+              </section>
+            </div>
             <%});%>
+
         </div>
-      </div>
+      </center>
     </div>
     <!---End Slider--------------->
 

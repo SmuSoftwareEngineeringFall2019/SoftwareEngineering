@@ -5,11 +5,11 @@ var app = express();
 var bodyParser = require('body-parser');
 
 //Server Credentials
-var user = 'group2';
-var password = 'escapeCORN58';
+var user = '';
+var password = '';
 var host = 'localhost';
 var port = '27017';
-var database = 'group2';
+var database = '';
 var connectionString = 'mongodb://' + user + ':' + password + '@' + host +
     ':' + port + '/' + database;
 
@@ -35,8 +35,8 @@ app.get("/", function(req, res) {
    testV2.ejs, as blogsVar. So now blogsVar can be used in the ejs file.
 */
 app.get(route, function(req, res) {
-    blog.find({author: "Michael"}, function(err, blogs) {
-      console.log(blogs);
+        blog.find({author: "Michael"}, function(err, blogs) {
+        console.log("Sending Blogs: " + blogs);
         if (err) {
             console.log(err);
         } else {
@@ -50,6 +50,7 @@ app.get(route, function(req, res) {
 */
 app.get(route2, function(req, res) {
     blog.find({author: "Judi"}, function(err, blogs) {
+      console.log("Sending Blogs: " + blogs);
         if (err) {
             console.log(err);
         } else {
@@ -71,24 +72,17 @@ app.get("/quickWriter", function(req, res) {
    contains all the blogs.
 */
 app.post("/create/new", function(req, res) {
-    console.log(req.body);
     var author = req.body.author;
     var title = req.body.title;
     var body = req.body.body;
     var time = req.body.time
     var newBlog = { author: author, title: title, body: body, time: time};
-    console.log(newBlog);
+    console.log("\nPosting blog: " + title);
     blog.create(newBlog, function(err, newlyCreated) {
         if (err) {
             console.log(err);
         } else {
-          if (author == "Michael") {
-            res.redirect(route);
-          } else if (author == "Judi") {
-            res.redirect(route2);
-          } else {
-            res.redirect("/");
-          }
+        console.log("Post success");
         }
     })
 });
@@ -111,7 +105,7 @@ var blogSchema = new mongoose.Schema({
    in the server, there's a collection called "blogs" now. We'll probably need
    one of these for each user, so they have seperate collections.
 */
-var blog = mongoose.model("prototypeTest1", blogSchema);
+var blog = mongoose.model("prototypeTest1.1", blogSchema);
 
 
 
