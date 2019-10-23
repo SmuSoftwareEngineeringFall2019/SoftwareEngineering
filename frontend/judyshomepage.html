@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--- Hello world -->
+
 <html>
 <head>
 <title>Judy's | Homepage</title>
@@ -74,21 +74,17 @@ $('.post-wrapper').slick({ // the class here refers to the div class that contai
   </header>
 
   <!---  the image after the nav bar -->
-  <section id="blogHeader">
-    <div class="container">
-      <h1><center><img style="width:50%; transform:translateY(-30%)" src="judy media/judyLogo.png" align="middle"></center></h1>
-      <p></p>
+    <div id="blogHeader">
+      <center><img src="judy media/judyLogo.png" alt="judi's logo"
+			align="middle" width="580" height="300"></center>
     </div>
-  </section>
 	<!-- background image -->
-	<section id="blogBackground">
-    <div class="container">
-      <h1><center><img src="judy media/judysbackground.jpg" align="middle">
+    <div id="blogBackground">
+      <h1><center><img src="judy media/judysbackground.jpg" align="middle"
+			height="400" width="1300">
       </center>
-    </h1>
-    
-    </div>
-  </section>
+    </h1> 
+   </div>
 	<!-- end image after nav -->
   <div class="search-box">
     <input class="search-txt" type="text" name="" placeholder="Search for Blogs...">
@@ -106,6 +102,46 @@ $('.post-wrapper').slick({ // the class here refers to the div class that contai
 
 
   <!---END DISPLAY BLOGS HERE----------------------------->
+	 <!---Page Wrapper--------------->
+        <div class="page-wrapper">
+            <!---Post Slider-------------->
+            <div class="post-slider">
+              <h1 class="slider-title"> Recent Posts</h1>
+              <!---insert the previous and forward icons from font awesome--->
+              <i class="fa fa-chevron-left prev"></i> <!--here prev will be used in the css file to style it.-->
+              <i class="fa fa-chevron-right next"></i> <!--here next will be used in the css file to style it.-->
+              <!---The Slider--------------->
+              <!--This is where you will call the blogs to be displayed -->
+              <div class="post-wrapper"> <!--this is the class called in the inline js above---->
+
+                  <!---insert blog div here--->
+                  <div class="posts" id="posts">
+                      <% blogsVar.forEach(function(blog){ %>
+                      <section class="post">
+                          <header class="post-header">
+                              <h2 class="post-title">
+                                  <%=blog.title%>
+                              </h2>
+                          </header>
+                          <div class="post-description">
+                            <!----When the user clicks the paragraph (or maybe a
+                             button beneath the paragraphthe box will expand with the
+                            full blog on the same page, so we need an onclick javascript
+                            function for the paragraph that will retrieve the full blog from the server
+                            ------------------->
+                              <p>
+                                  <%=blog.body%>
+                              </p>
+                          </div>
+                      </section>
+                      <%});%>
+                  </div>
+            </div>
+          </div>
+          <!---End Slider--------------->
+
+        </div>
+        <!---End Wrapper--------------->
 
 </body>
 </html>
