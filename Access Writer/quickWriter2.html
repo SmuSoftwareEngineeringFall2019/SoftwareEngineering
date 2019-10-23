@@ -24,16 +24,33 @@ tools to make writing easier.
 
     <!----Mikes Logo----->
     <img src ="quickWriter.png" alt="logo" width="15%">
+    <!---- Drop Down Menu to top right of page --------->
+
+    <div class="dropdown" style="float:right; transform:translate(-13px, 20px);">
+      <button class="dropbtn" style="background:#AC0C0C;">Dropdown</button>
+      <div class="dropdown-content">
+        <a href="#" style="color: black;">Mike's Blog</a>
+        <a href="#" style="color: black;">Judy's Blog</a>
+      </div>
+    </div>
+
+
+
+    <!---- End Drop Down -------------->
     <!--"content" format edges of the screen-->
     <div data-role="content">
         <!--Text box (textarea allows the box to expand)-->
-        <p data-editable onclick="checkField(0)" id="userTitle" class="titleHeader" style="transform: translateY(-30%);" >Title-1</p>
+        <p data-editable onclick="checkField(0)" id="userTitle" class="titleHeader"
+         style="transform: translateY(-30%);" >Title-1</p>
 
         <div id="textBox">
-            <textarea placeholder="Share Your Story..." class="textArea" onclick="checkField(1)" autofocus style="transform: translateY(-20%);height:470px;outline:none ! important;" id="userText"></textarea>
+            <textarea placeholder="Share Your Story..." class="textArea"
+            onclick="checkField(1)" autofocus style="transform: translateY(-20%);
+            height:470px;outline:none ! important;" id="userText"></textarea>
         </div>
         <!--Three black buttons (delete, delete word, and space)-->
-      <center>  <div style="transform: translateY(-300%);" data-role="controlgroup" data-type="horizontal"  data-enhance=”false” id="test-container">
+      <center>  <div style="transform: translateY(-300%);" data-role="controlgroup"
+        data-type="horizontal"  data-enhance=”false” id="test-container">
             <a class="redCaps" data-role="button" onclick="caps()" data-theme="a">Caps Lock</a>
             <a data-role="button" onclick="undo()" data-theme="a">Undo</a>
             <a data-role="button" onclick="redo()" data-theme="a">Redo</a>
@@ -51,7 +68,7 @@ tools to make writing easier.
             <a data-role="button" onclick="addWord('\n')" data-theme="a"
             style="background:#AC0C0C; width: 100px;  height: 50px !important">ENTER</a>
             <a data-role="button" onclick="del()" data-theme="a"
-            style="background:#AC0C0C; width: 100px;  height: 50px !important">BACKSPACE</a>
+            style="background:#AC0C0C; width: 150px;  height: 50px !important">BACKSPACE</a>
             <a data-role="button" onclick="addWord('\t')" data-theme="a"
             style="background:#AC0C0C; width: 100px; position:relative;  height: 50px !important ">TAB</a>
         </div>
