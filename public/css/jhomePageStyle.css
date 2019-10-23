@@ -42,7 +42,7 @@ header nav {
 
 /*------------------------IMAGE UNDER THE HEADER--------------------*/
 #blogHeader {
-  transform: translateY(-40px);
+  transform: translateY(-60px);
   padding: 10px 0 0 10px;
   /* background: url('../Judis Media/judiLogo.png') no-repeat; */
 }
@@ -50,7 +50,7 @@ header nav {
 #blogBackground {
  /* min-height: 400px;*/
   /* background: url('../Judis Media/judisbackground.jpg') no-repeat; */
-  transform: translateY(-120px);
+  transform: translateY(-110px);
   background-size: cover;
   margin: -20px -20px 30px -20px;
   box-shadow: 10px 10px 5px #ccc;
