@@ -5,11 +5,11 @@ var app = express();
 var bodyParser = require('body-parser');
 
 //Server Credentials
-var user = 'group2';
-var password = 'escapeCORN58';
+var user = '';
+var password = '';
 var host = 'localhost';
 var port = '27017';
-var database = 'group2';
+var database = '';
 var connectionString = 'mongodb://' + user + ':' + password + '@' + host +
     ':' + port + '/' + database;
 
