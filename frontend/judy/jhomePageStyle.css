@@ -198,7 +198,7 @@ header nav {
 
 /*------------------BEGIN BLOG POSTS----------------------------*/
 .post-slider {
-
+  transform: translateY(-50px);
   position: relative; /*this is to help position the next and prev icons*/
 }
 
