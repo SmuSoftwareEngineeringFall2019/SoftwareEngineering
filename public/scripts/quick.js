@@ -209,7 +209,7 @@ function checkField(num) {
     if (num === 1) {
         focus = "userText";
     } else if (num === 0) {
-        focus = "userTitle";
+        focus = "title";
     }
 
     getCursor();
