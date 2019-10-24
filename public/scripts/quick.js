@@ -1,12 +1,12 @@
-/**
- * TODO
+/** 
+ * TODO 
  * Change from local storage
- * fix bugs for middle text editing (quick highlight wont plus backspace wont delte)
  * end of line and new characterto go on next line
  * cursor position after undo/redo.
- * visual cursor doesnt follow backspace button (reapplying focus puts cursor at end)
- *
- *
+ * JUDY WITH ONLY TOP BUTTONS TO WORK WITH KEYBOARD
+ * http://ugdev.cs.smu.ca:3000/create
+ * 
+ * 
  * Author: Jacob Vincent (A00419169)
  **/
 var lowerBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
@@ -70,7 +70,7 @@ function makeBoard() {
     $("div.keyboardRow4").html("");
     $("div.keyboardRow4").trigger("create");
 
-//create 4 rows of words
+//create 4 rows of words 
     //string being built to represent the button in HTML
     var htmlString = "";
     var leng = 12;
@@ -78,7 +78,7 @@ function makeBoard() {
 
 //create the 4 blocks of buttons
     for (j = 0; j < 4; j++) {
-        htmlString = "<div data-role='controlgroup' data-type='horizontal' class='buttonStyle'>";
+        htmlString = "<div data-role='controlgroup' data-type='horizontal'>";
         //Last row has 10 buttons
         if (j === 3) {
             leng = 10;
@@ -108,10 +108,10 @@ function makeBoard() {
     }
 }
 
-/**
+/** 
  * Adds a word to the textarea
- *
- * @param {String} word The word to be added to the textarea
+ * 
+ * @param {String} word The word to be added to the textarea 
  **/
 function addWord(word) {
 document.getElementById(focus).focus();
@@ -124,9 +124,11 @@ document.getElementById(focus).focus();
     if (start === end) {
         start++;
         end++;
+        document.getElementById(focus).setSelectionRange(start, end);
     } else {
         start++;
         end = start;
+        document.getElementById(focus).setSelectionRange(start, end);
     }
 
     if (focus === "userText") {
@@ -137,22 +139,23 @@ document.getElementById(focus).focus();
 //Backspace/delete highlighted text with respect to cursor position
 function del() {
     document.getElementById(focus).focus();
-    curs.selectionStart = start;
-    curs.selectionEnd = end;
+
     var curString = document.getElementById(focus).value;
 
     if (start === end) {
         document.getElementById(focus).value =
-                curString.substring(0, start - 1)
+                curString.substring(0, start - 1) 
                 + curString.substring(end, curString.length);
         start--;
         end--;
+        document.getElementById(focus).setSelectionRange(start, end);
     } else {
 
         document.getElementById(focus).value =
-                curString.substring(0, start)
+                curString.substring(0, start) 
                 + curString.substring(end, curString.length);
         end = start;
+        document.getElementById(focus).setSelectionRange(start, end);
     }
 
     if (focus === "userText") {
@@ -167,6 +170,7 @@ function undo() {
         var lastText = oldStack.pop();
         currentStack.push(lastText);
         document.getElementById("userText").value = lastText;
+        getCursor();
     }
 }
 
@@ -175,8 +179,9 @@ function redo() {
     document.getElementById(focus).focus();
     if (currentStack.length > 1) {
         oldStack.push(currentStack.pop());
-        document.getElementById("userText").value =
+        document.getElementById("userText").value = 
                 currentStack[currentStack.length - 1];
+         getCursor();
     }
 }
 
@@ -246,3 +251,4 @@ function publish() {
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send(data);
 }
+
