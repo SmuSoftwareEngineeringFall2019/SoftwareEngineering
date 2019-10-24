@@ -3,25 +3,16 @@ body {
 	color: white;
 }
 /*-----------HEADER NAVBAR----------------*/
-header {
-	background: black;
-	color: white;
-	padding-top:30px;
-	padding-bottom:-90px;
-	min-height: 70px;
-	min-height: 50%;
-	overflow-x: hidden;
-
-	/* bleeds the header*/
-	margin: -20px -60px 20px -20px;
-	transform: translateY(-120px);
+.header {
+	padding:15px;
+    background: black;
+	margin: -8px -8px 0px -8px;
 }
 /*-----------SECTIONS--------------*/
 .split {
 	height: 80%;
 	width: 50%;
 	position: fixed;
-	z-index: 1;
 	top: 0;
 	overflow-x: hidden;
 	padding-top: 10px;
@@ -35,39 +26,34 @@ header {
 	/*background-color: red;*/
 }
 .centered {
-	width: 950px;
+	width: 100%;
 	position: absolute;
-	top: 50%;
+	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	text-align: center;
 }
 /*-------------IMAGES-------------------*/
 #landingPageLogo {
-	margin:auto;
-	width:80%;
-	height:200px;
-	object-fit: cover;
-	transform:translateY(-130px);
+	display:block;
+    margin:auto;
+    max-width:800px;
 }
 #JudisLandingPageLogo {
-	margin:auto;
-	width:100%;
-	height:200px;
-	object-fit: cover;
-	transform:translateY(-120px);
+	display:block;
+    margin:auto;
+    max-width:800px;
 }
 /*----------------------START ENTER BUTTON FOR MICHAEL------------------------------------*/
-.btn{
+.btn {
     font-family: 'Courier New';
     font-size: 100%;
-    /*response button*/
-    width: 400%;
-    min-width: 50px;
 }
 .enterBtn {
-    position: relative;
-    transform: translateY(-45px);
+    position: absolute;
+    bottom:10%;
+	left:50%;
+	transform:translateX(-50%);
 }
 .enterBtn .btn {
     left: 50%;
@@ -76,18 +62,14 @@ header {
     color: white;
     font-size: 25px;
     /*padding increases button width and height */
-    padding: 26px 70px;
+    padding: 26px 90px;
     border: none;
     border-radius: 10px;
-    text-align: center;
-    /*change btn size*/
-    width: 35%;
-    resize: both;
     box-shadow: 0 9px #999;
 }
-.enterBtn:active {
+/*.enterBtn:active {
 	box-shadow: 0 8px #666;
-}
+}*/
 .enterBtn .btn:hover {
     background-color:orange;
     color: black;
@@ -101,13 +83,12 @@ header {
 .judisBtn{
     font-family: 'Courier New';
     font-size: 100%;
-    /*response button*/
-    width: 400%;
-    min-width: 50px;
 }
 .judisEnterBtn {
-    position: relative;
-    transform:translateY(-45px);
+    position: absolute;
+    bottom:10%;
+	left:50%;
+	transform:translateX(-50%);
 }
 .judisEnterBtn .judisBtn {
     left: 50%;
@@ -116,18 +97,15 @@ header {
     color: white;
     font-size: 25px;
     /*padding increases button width and height */
-    padding: 26px 70px;
+    padding: 26px 90px;
     border: none;
     border-radius: 80px;
-    text-align: center;
     /*change btn size*/
-    width: 30%;
-    resize: both;
     box-shadow: 2px 9px #999;
 }
-.judisEnterBtn:active {
+/*.judisEnterBtn:active {
 	box-shadow: 0 8px #666;
-}
+}*/
 .judisEnterBtn .judisBtn:hover {
     background-color: teal;
     color: black;
@@ -154,12 +132,13 @@ header {
 }
 .makePostBtn .postBtn {
     /*padding increases button width and height */
-    padding: 26px 70px;
+    padding: 26px;
     border-radius: 80px;
+    width:350px;
 }
-.makePostBtn:active {
+/*.makePostBtn:active {
 	box-shadow: 0 8px #666;
-}
+}*/
 .makePostBtn .postBtn:hover {
     background-color: green;
     color: black;
