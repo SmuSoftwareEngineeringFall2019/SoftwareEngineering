@@ -24,7 +24,7 @@ var oldStack = [];
 var currentStack;
 
 //current text field being edited
-var focus = "userText";
+var focus = "title";
 
 //capital or lowercase keyboard
 var cap = false;
