@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
   <title>Mikes | Homepage</title>
 
-
   <!-- responsive webpage requires, viewport, content attribute -->
   <meta charset="utf-8">
-
 
   <meta name="description" content="Blog Site for Mike">
   <meta name="keywords" content="web design, mike webpage, blog">
@@ -28,8 +24,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-
   <!--INLINE JAVASCRIPT FOR SLIDER----->
 
 
@@ -38,83 +32,70 @@
 
 <body>
   <header>
-
-    <div class="container">
-      <div id="homepage">
-        <!--  <input type="file" id="mikesBlog"> -->
-        <!-- add id "btnBlogs when you know how to code the js" -->
-        <h1 style="margin: 8px 0 0 25px">
-        <button class="button blogBtn" >blogs |</button>
-      </h1>
-
-      </div>
-
+    <div id="homepage">
+    <!--  <input type="file" id="mikesBlog"> -->
+    <!-- add id "btnBlogs when you know how to code the js" -->
+      <button class="button blogBtn" >blogs |</button>
+    </div>
+    <div class="search-box">
+      <input class="search-txt" type="text" placeholder="Search for Blogs...">
+      <a class="search-btn" href="#"></a>
+      <i id="searchIcon" class="fa fa-search"></i>
     </div>
   </header>
   <!--  the image after the nav bar -->
-  <section id="blogHeader">
-    <div class="container">
-      <h1><center><img src="Mikes Media/whiteLogo6.png" align="middle">
-      </center>
-    </h1>
-
-    </div>
-  </section>
-  <!-- end image after nav -->
-  <div class="search-box">
-    <input class="search-txt" type="text" name="" placeholder="Search for Blogs...">
-    <a class="search-btn" href="#"></a>
-    <i id="searchIcon" class="fa fa-search" style="font-size: 1.60em; transform: translate(135%, 30%); color: white"></i>
-
+  <div id="blogHeader">
+    <img src="Mikes Media/whiteLogo6.png" id="logo">
   </div>
+  <!-- end image after nav -->
   <!---START DISPLAYING BLOGS HERE ---------------------------------->
 
   <!---END DISPLAY BLOGS HERE----------------------------->
 
   <!---Page Wrapper--------------->
   <div class="page-wrapper">
-    <!---Post Slider-------------->
-    <div class="post-slider">
-      <h1 class="slider-title"> Recent Posts</h1>
-      <!---insert the previous and forward icons from font awesome--->
-      <i class="fa fa-chevron-left prev"></i>
-      <!--here prev will be used in the css file to style it.-->
-      <i class="fa fa-chevron-right next"></i>
-      <!--here next will be used in the css file to style it.-->
-      <!---The Slider--------------->
-      <!--This is where you will call the blogs to be displayed -->
-      <center>
-        <div class="post-wrapper">
-          <!--this is the class called in the inline js above---->
+  <!---Post Slider-------------->
+  <div class="post-slider">
+    <h1 class="slider-title"> Recent Posts</h1>
+    <!---insert the previous and forward icons from font awesome--->
+    <i class="fa fa-chevron-left prev"></i>
+    <!--here prev will be used in the css file to style it.-->
+    <i class="fa fa-chevron-right next"></i>
+    <!--here next will be used in the css file to style it.-->
+    <!---The Slider--------------->
+    <!--This is where you will call the blogs to be displayed -->
+    <center>
+    <div class="post-wrapper">
+      <!--this is the class called in the inline js above---->
 
 
-          <!---insert blog div here--->
-          <% blogsVar.forEach(function(blog){ %>
-            <div class="posts" id="posts">
-              <section class="post">
-                <header class="post-header">
-                  <h2 class="post-title">
-                                    <%=blog.title%>
-                                </h2>
-                </header>
-                <div class="post-description">
-                  <!----When the user clicks the paragraph (or maybe a
-                               button beneath the paragraphthe box will expand with the
-                              full blog on the same page, so we need an onclick javascript
-                              function for the paragraph that will retrieve the full blog from the server
-                              ------------------->
-                  <p>
-                    <%=blog.body%>
-                  </p>
-                </div>
-              </section>
-            </div>
-            <%});%>
-
+      <!---insert blog div here--->
+      <% blogsVar.forEach(function(blog){ %>
+      <div class="posts" id="posts">
+        <section class="post">
+        <header class="post-header">
+          <h2 class="post-title">
+                  <%=blog.title%>
+                </h2>
+        </header>
+        <div class="post-description">
+          <!----When the user clicks the paragraph (or maybe a
+                 button beneath the paragraphthe box will expand with the
+                full blog on the same page, so we need an onclick javascript
+                function for the paragraph that will retrieve the full blog from the server
+                ------------------->
+          <p>
+          <%=blog.body%>
+          </p>
         </div>
-      </center>
+        </section>
+      </div>
+      <%});%>
+
     </div>
-    <!---End Slider--------------->
+    </center>
+  </div>
+  <!---End Slider--------------->
 
   </div>
   <!---End Wrapper--------------->
