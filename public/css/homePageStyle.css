@@ -3,7 +3,7 @@
 /*-----------NAVBAR----------------*/
 header {
   background: black;
-  padding:42px;
+  padding:32px;
 	margin: -8px -8px 0px -8px;
 }
 header ul {
@@ -20,18 +20,19 @@ header nav {
 /*------------------------IMAGE UNDER THE HEADER--------------------*/
 #blogHeader {
   display:block;
-  height: 400px;
+  max-width:110%;
+  height:auto;
   background: url('../Mikes Media/blogHeader.jpg') no-repeat;
   background-size: cover;
   margin: 0px -8px 0px -8px;
   box-shadow: 10px 10px 5px #ccc;
 }
 #logo {
+  content:url("../Mikes Media/whiteLogo6.png");
   display:block;
   margin:auto;
   width:100%;
   max-width:1000px;
-  transform:translateY(10%);
 }
 /* ----------END IMAGE UNDER HEADER--------------------------------------*/
 
@@ -186,9 +187,9 @@ header nav {
   width: 84%;
   height: 350px;
   margin: 0px auto; /*the auto makes sure it is centered horizontally*/
-
   overflow: hidden; /*if there is overflow outside of the parent
    container post slider, hide it.*/
+  text-align:center
 }
 /*style each post/blog that is inside the post wrapper*/
 .post-slider .post-wrapper .posts {
