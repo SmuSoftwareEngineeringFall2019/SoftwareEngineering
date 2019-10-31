@@ -24,6 +24,7 @@ header nav {
   height:auto;
   background: url('../Judis Media/judisbackground.jpg') no-repeat;
   background-size: cover;
+  background-position:0% 50%;
   margin: 0px -8px 0px -8px;
   box-shadow: 10px 10px 5px #ccc;
 }

@@ -1,4 +1,4 @@
-/*Home Page Style Sheet*/
+/*Mike's Home Page Style Sheet*/
 
 /*-----------NAVBAR----------------*/
 header {
@@ -24,6 +24,7 @@ header nav {
   height:auto;
   background: url('../Mikes Media/blogHeader.jpg') no-repeat;
   background-size: cover;
+  background-position:0% 10%;
   margin: 0px -8px 0px -8px;
   box-shadow: 10px 10px 5px #ccc;
 }
