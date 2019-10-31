@@ -1,120 +1,47 @@
-/*Home Page Style Sheet*/
+/*Mike's Home Page Style Sheet*/
 
-body {
-}
 /*-----------NAVBAR----------------*/
 header {
   background: black;
-  color: white;
-  padding-top:30px;
-  padding-bottom:-90px;
-  min-height: 70px;
-
-  /* bleeds the header*/
-  margin: -20px -20px 20px -20px;
+  padding:32px;
+	margin: -8px -8px 0px -8px;
 }
-
 header ul {
   /*Unordered lists have padding by default*/
   margin:0;
   padding: 0;
 }
-
-header #homepage {
-  /*floating the "blogs" to the left*/
-  float:left;
-  padding-right: 4px;
-  font-family: 'Courier New';
-  font-weight: 100;
-}
-
-header #homepage {
-  margin: auto;
-}
-
 header nav {
   float:right;
   margin-top:10px;
-
 }
 /*------------END   NAVBAR -------------------*/
 
-
 /*------------------------IMAGE UNDER THE HEADER--------------------*/
 #blogHeader {
-  transform: translateY(-60px);
-  padding: 10px 0 0 10px;
-  /* background: url('../Judis Media/judiLogo.png') no-repeat; */
-}
-
-#blogBackground {
- /* min-height: 400px;*/
-  /* background: url('../Judis Media/judisbackground.jpg') no-repeat; */
-  transform: translateY(-110px);
+  display:block;
+  max-width:110%;
+  height:auto;
+  background: url('../Judis Media/judisbackground.jpg') no-repeat;
   background-size: cover;
-  margin: -20px -20px 30px -20px;
+  margin: 0px -8px 0px -8px;
   box-shadow: 10px 10px 5px #ccc;
 }
-
-
-
-
-
-
-
+#logo {
+  content:url("../Judis Media/judiLogo.png");
+  display:block;
+  margin:auto;
+  width:100%;
+  max-width:1000px;
 }
 /* ----------END IMAGE UNDER HEADER--------------------------------------*/
 
-  /*----------------------Enter Button Styled-----------------------------*/
-  .enterBtn {
-    position: relative;
-  }
-  .enterBtn .btn {
-
-      left: 50%;
-      /*pushes button up */
-      transform: translate(120%, 50%);
-
-      background-color: #ee65a3 ;
-      color: white;
-      font-size: 25px;
-      /*padding increases button width and height */
-      padding: 26px 70px;
-      border: none;
-      border-radius: 10px;
-      text-align: center;
-      /*change btn size*/
-      width: 30%;
-      resize: both;
-      box-shadow: 0 9px #999;
-
-}
-.enterBtn:active {
-      box-shadow: 0 8px #666;
-      transform: translateY(8px);
-}
-
-
-  .enterBtn .btn:hover {
-      background-color: orange;
-      /*font color on hover*/
-      color: black;
-
-      /* add the option to make button bigger on hover */
-  }
-  /* -------------------------END ENTER BUTTON-------------------------- */
-
-  /* -------------------------FONT-STYLE ENTER BUTTON-------------------------- */
-  .btn {
-      font-family: 'Courier New';
-      font-size: 100%;
-      /*response button*/
-      width: 100%;
-      min-width: 50px;
-}
-/*--------------------END FONT STYLE ENTER BUTTON --------------*/
-
 /*--------------------BLOG TEXT BUTTON --------------*/
+.blogBtn {
+  position:absolute;
+  left:10px;
+  top:10px;
+}
 .button {
   font-family: Courier;
   border: none;
@@ -125,24 +52,18 @@ header nav {
   display: inline-block;
   color:white;
 }
-
 .button:hover {
   background: gold;
   color: black;
   border-radius: 5px;
 }
-
-.blogBtn {
-  font-color: white;
-}
-
 /*-----------------END BLOG TEXT----------------------------*/
 
 /*-----------------SEARCH BUTTON----------------------------*/
 .search-box {
   position: absolute;
-  top:2%;
-  right: 1%;
+  top:2px;
+  right:10px;
   background: black;
   height: 40px;
   border-radius: 47px;
@@ -187,6 +108,11 @@ header nav {
   font-family: "Courier New";
 }
 
+#searchIcon {
+  font-size: 1.60em; 
+  transform: translate(135%, 30%); 
+  color: white;
+}
 
 ::placeholder {
   color: white;
@@ -195,9 +121,35 @@ header nav {
 }
 /*-----------------END SEARCH BUTTON----------------------------*/
 
-/*------------------BEGIN BLOG POSTS----------------------------*/
+/*-----------------------ACTUAL BLOG POST STYLING---------------------------*/
+.post-header {
+  background: white;
+  color: black;
+  font-family: 'Courier New';
+  text-align: center; /*center blog titles*/
+  padding-top: 30px;
+  padding-bottom: 0px;
+  min-height: 70px;
+  margin: 20px -20px 40px -10px;
+}
+
+.post-description {
+  padding-left: 50px;
+  text-align: center;
+  color: black;
+  font-family: 'Calibri';
+}
+
+.posts .post-title {
+  color: black;
+  font-family: 'Courier New';
+  text-align: center;
+}
+/*-----------------END BLOG POST STYLING DISPLAY-----------------------------*/
+
+/* ----------SLIDER FOR BLOGS--------------------------------------*/
 .post-slider {
-  transform: translateY(-50px);
+
   position: relative; /*this is to help position the next and prev icons*/
 }
 
@@ -207,7 +159,6 @@ header nav {
   margin: 30px auto;
   font-family: Courier;
   color: black;
-	transform: translateY(-70%)
 }
 /*Edit icons, they are also in the post-slider*/
 .post-slider .next {
@@ -236,9 +187,9 @@ header nav {
   width: 84%;
   height: 350px;
   margin: 0px auto; /*the auto makes sure it is centered horizontally*/
-
   overflow: hidden; /*if there is overflow outside of the parent
    container post slider, hide it.*/
+  text-align:center
 }
 /*style each post/blog that is inside the post wrapper*/
 .post-slider .post-wrapper .posts {
@@ -263,31 +214,4 @@ header nav {
   color:#AC0C0C;
   cursor: pointer;
 }
-
 /* ---------END SLIDER FOR BLOGS--------------------------------------*/
-/*-----------------------ACTUAL BLOG POST STYLING---------------------------*/
-.post-header {
-  background: white;
-  color: black;
-  font-family: 'Courier New';
-  text-align: center; /*center blog titles*/
-  padding-top: 30px;
-  padding-bottom: 0px;
-  min-height: 70px;
-  margin: 20px -20px 40px -10px;
-}
-
-.post-description {
-  padding-left: 50px;
-  text-align: center;
-  color: black;
-  font-family: 'Calibri';
-}
-
-.posts .post-title {
-  color: black;
-  font-family: 'Courier New';
-  text-align: center;
-}
-
-/*-----------------END BLOG POST STYLING DISPLAY-----------------------------*/
