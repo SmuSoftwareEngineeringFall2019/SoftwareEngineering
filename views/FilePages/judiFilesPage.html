@@ -1,0 +1,108 @@
+<!-- Blog Page --->
+<!-- Judi's Login Page -->
+<html>
+  <head>
+    <!--- responsive webpage requires, viewport, content attribute -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Blog Site for Judi">
+    <meta name="keywords" content="web design, jud's webpage, blog">
+    <meta name="author" content="Judi">
+
+    <link rel="stylesheet"  type = "text/css" href = "judisFilesPage.css" />
+    <!-- jquery library added to fix "$ not defined" error -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+    <title>Files | Judi</title>
+  </head>
+<body>
+<div class="logoContainer">
+  <div class="centered" style="width: 100%">
+
+    <!-------------------------- HEADER HERE ------------------------------>
+
+     <!-- begin navbar -->
+     <header>
+     <div class= "container">
+  <div id="homepage">
+    <h1 style="margin: 8px 0 0 25px">
+      <a href="judisHomepage.ejs"><button class="button blogBtn" >blogs |</button></a>
+    </h1>
+  </div>
+
+  </div>
+     </header>
+     <!----------------- end nav bar -------------------------------------->
+
+             <!----- File Font above files retrieved from server side --->
+           <center>
+             <h2 style="font-size: 60px;font-weight: normal">FILES</h2></br></br>
+           </center>
+             <!--- end file font ------->
+						 
+						 <!--- New button to create new story, so the new button will link to quick writer-->
+<div class="newBtnPosition">
+<a href ="quickWriter.ejs"><button type="button" class="newBtn">New Blog</button></a>
+</div>
+<!---------  End new button --------->
+
+  <!--- blogs from server will appear vertically, each blog field will have
+  a unpublished + published toggle button, along with a delete icon to the left -->
+
+    <!--This is where you will call the blogs to be displayed -->
+
+        <!-- generate buttons for each file on te server using for loop? -->
+        <!--for (var doc in docs) {
+      var element = document.createElement("button");
+      //Assign different attributes to the element.
+      element.setAttribute("name", doc.name);
+      element.innerHTML = doc.name
+      element.setAttribute("id", doc._id);
+      //element.setAttribute("onclick", ); If you wish to add click event
+
+      //Append the element in page (in span).
+      document.body.appendChild(element);
+} -->
+
+
+     <center>
+       <div class="buttonContainer">
+         <!-- the blog titles (and a short snippet of the story) will be
+         generated in buttons here, (not sure if i added that in correctly)-->
+
+         <!-- When user clicks one of the buttons, it will naviagte to the type writer. The
+         type writer will display the content and allow judy to continue writing,   -->
+      <% blogsVar.forEach(function(blog){ %>
+        <br>
+       <a href="quickWriter.js" style="text-decoration: none;">
+         <div class ="fileBtn">
+           <!-- code for alert msg for deleting a file -->
+
+           <!-- delete btn -->
+           <button class="deleteBtn"
+           onclick="return confirm('Are you sure you want to delete this file?');">Delete</button>
+         <%=blog.title%>
+         <p style="float:center; font-size: 40%">
+           <%=blog.body%>
+         </p>
+      <div class="toggleBtn">
+        <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+          <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+  </div>
+    <%});%>
+  </div>
+</center>
+</div>
+</a>
+
+  </div>
+
+  </div>
+</div>
+
+</body>
+</html>
