@@ -1,155 +1,224 @@
 body {
-	font-family: Arial;
-	color: white;
+  font-family: Arial;
+  color: white;
 }
-/*-----------HEADER NAVBAR----------------*/
-.header {
-	padding:15px;
-    background: black;
-	margin: -8px -8px 0px -8px;
-}
-/*-----------SECTIONS--------------*/
+
 .split {
-	height: 80%;
-	width: 50%;
-	position: fixed;
-	top: 0;
-	overflow-x: hidden;
-	padding-top: 10px;
+  height: 80%;
+  /*change to 100% to fit page*/
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 10px;
 }
+
 .left {
-	left: 0;
-	/*background-color: green;*/
+  left: 0;
+  /*background-color: green;*/
 }
+
 .right {
-	right: 0;
-	/*background-color: red;*/
+  right: 0;
+  /*background-color: red;*/
+}
+.row {
+  background-color: yellow;
+  height: 20%;
 }
 .centered {
-	width: 100%;
-	position: absolute;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
-/*-------------IMAGES-------------------*/
-#landingPageLogo {
-	display:block;
-    margin:auto;
-    max-width:800px;
+
+.centered img {
+  width: 100%;
+
 }
-#JudisLandingPageLogo {
-	display:block;
-    margin:auto;
-    max-width:800px;
-}
-/*----------------------START ENTER BUTTON FOR MICHAEL------------------------------------*/
-.btn {
-    font-family: 'Courier New';
-    font-size: 100%;
-}
+
+/*style enter button*/
+
+/*----------------------Enter Button Styled------------------------------------*/
 .enterBtn {
-    position: absolute;
-    bottom:10%;
-	left:50%;
-	transform:translateX(-50%);
+
+    position: relative;
+    transform: translateY(-45px);
+
 }
 .enterBtn .btn {
     left: 50%;
+
     /*pushes button up right under Welcome back text*/
+
     background-color: #AC0C0C ;
     color: white;
     font-size: 25px;
     /*padding increases button width and height */
-    padding: 26px 90px;
+    padding: 26px 70px;
     border: none;
     border-radius: 10px;
+    text-align: center;
+    /*change btn size*/
+    width: 35%;
+    resize: both;
     box-shadow: 0 9px #999;
+
 }
-/*.enterBtn:active {
-	box-shadow: 0 8px #666;
-}*/
+.enterBtn:active {
+      box-shadow: 0 8px #666;
+
+}
+
 .enterBtn .btn:hover {
     background-color:orange;
+    /*font color on hover*/
     color: black;
     cursor: pointer;
+
     /* add the option to make button bigger on hover */
 }
-/*--------------------------END ENTER BUTTON FOR MICHAEL----------------------*/
 
 
-/*----------------------START ENTER BUTTON FOR JUDY-----------------*/
-.judisBtn{
+/* -------------------------FONT-STYLE ENTER BUTTON-------------------------- */
+.btn {
     font-family: 'Courier New';
     font-size: 100%;
+    /*response button*/
+    width: 400%;
+    min-width: 50px;
 }
-.judisEnterBtn {
-    position: absolute;
-    bottom:10%;
-	left:50%;
-	transform:translateX(-50%);
+#landingPageLogo {
+  width:80%;
+  height:200px;
+  object-fit: cover;
+  transform:translateY(-130px);
 }
-.judisEnterBtn .judisBtn {
-    left: 50%;
-    /*pushes button up right under Welcome back text*/
-    background-color: #C89BBE;
-    color: white;
-    font-size: 25px;
-    /*padding increases button width and height */
-    padding: 26px 90px;
-    border: none;
-    border-radius: 80px;
-    /*change btn size*/
-    box-shadow: 2px 9px #999;
+#JudisLandingPageLogo {
+  width:100%;
+  height:200px;
+  object-fit: cover;
+  transform:translateY(-120px);
 }
-/*.judisEnterBtn:active {
-	box-shadow: 0 8px #666;
-}*/
-.judisEnterBtn .judisBtn:hover {
-    background-color: teal;
-    color: black;
-    cursor: pointer;
-    /* add the option to make button bigger on hover */
-}
-/*-------------------------END ENTER BUTTON FOR JUDY ---------------------*/
 
 
-/*---------------------- START CREATE POST BUTTON -----------------*/
+/*NAVBAR*/
+/*-----------HEADER NAVBAR----------------*/
+header {
+  background: black;
+  color: white;
+  padding-top:30px;
+  padding-bottom:-90px;
+  min-height: 70px;
+  min-height: 50%;
+  overflow-x: hidden;
+
+  /* bleeds the header*/
+  margin: -20px -60px 20px -20px;
+  transform: translateY(-120px);
+}
+
+.makePost {
+  width: 100%;
+}
+/*---------END FLEX BOX STYLING --------------*/
+
+
+/*----------------------START BUTTON FOR MAKE A POST-----------------*/
 .makePostBtn {
-	position: fixed;
-	bottom: 5%;
-	left:50%;
-	transform:translateX(-50%);
+
 }
-.postBtn{
-	background-color: black;
-    color: white;
-    font-family: Courier;
-    font-size: 25px;
-	border: none;
-	box-shadow: 0px 9px #999
-}
+
 .makePostBtn .postBtn {
+    /*pushes button up right under Welcome back text*/
+
+    background-color: black; ;
+    color: white;
+    font-size: 25px;
     /*padding increases button width and height */
-    padding: 26px;
+    padding: 26px 70px;
+
     border-radius: 80px;
-    width:350px;
+    text-align: center;
+    /*change btn size*/
+    width: 20%;
+
+    box-shadow: 2px 9px #999;
+    font-family: Courier;
+    transform:translateY(900%);
+    text-align:center;
+
 }
-/*.makePostBtn:active {
-	box-shadow: 0 8px #666;
-}*/
+.makePostBtn:active {
+      box-shadow: 0 8px #666;
+
+}
+
 .makePostBtn .postBtn:hover {
     background-color: green;
+    /*font color on hover*/
     color: black;
     cursor: pointer;
-    /* add the option to make button bigger on hover? */
+
+    /* add the option to make button bigger on hover */
 }
-/* ------------------------- END CREATE POST BUTTON ----------------- */
+/* -------------------------END  BUTTON FOR MAKE A POST----------------- */
 
 
+/*----------------------START ENTER BUTTON FOR JUDI-----------------*/
+.judisEnterBtn {
+    position: relative;
+    transform:translateY(-45px);
+}
 
-/*-------------------------------- START BIRDS-----------------------*/
+.judisEnterBtn .judisBtn {
+
+    left: 50%;
+  /*  transform: translate(130%, -208%);*/
+    /*pushes button up right under Welcome back text*/
+
+    background-color: teal;
+    color: white;
+    font-size: 25px;
+    /*padding increases button width and height */
+    padding: 26px 70px;
+    border: none;
+    border-radius: 80px;
+    text-align: center;
+    /*change btn size*/
+    width: 30%;
+    resize: both;
+    box-shadow: 2px 9px #999;
+
+}
+.judisEnterBtn:active {
+      box-shadow: 0 8px #666;
+      /*transform: translateY(8px);*/
+}
+
+.judisEnterBtn .judisBtn:hover {
+    background-color: orange;
+    /*font color on hover*/
+    color: black;
+    /* add the option to make button bigger on hover */
+    cursor: pointer;
+}
+/* -------------------------END ENTER BUTTON FOR JUDI----------------- */
+/*--------------------------FONT- STYLE JUDI BUTTON---------------------*/
+.judisBtn {
+    font-family: 'Courier New';
+    font-size: 100%;
+    /*response button*/
+    width: 100%;
+    min-width: 50px;
+}
+/*-------------------------END FONT-STYLE JUDY BUTTON ---------------------*/
+
+
+/*-------------------------------- BIRDS-----------------------*/
 .containerBirds {
 
     z-index: 1;
