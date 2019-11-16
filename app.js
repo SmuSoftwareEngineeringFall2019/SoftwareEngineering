@@ -13,7 +13,7 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 
-//Configutation
+//Configuration
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
