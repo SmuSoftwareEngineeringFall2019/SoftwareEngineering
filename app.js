@@ -44,15 +44,14 @@ mongoose.connect(connectionString, { useNewUrlParser: true,
 var blogSchema = new mongoose.Schema({
     title: String,
     body: String,
-    created: { type: Date, default: Date.now },
+    time: String,
     published: Boolean,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
-        username: String,
-        page: String
+        username: String
     }
 });
 
@@ -63,8 +62,7 @@ var blogSchema = new mongoose.Schema({
 */
 var userSchema = new mongoose.Schema({
     username: String,
-    password: String,
-    page: { type: String, default: 'mikesHomePage'}  //Change to correct page//
+    password: String
 });
 
 /* Plugin to use the passportlocalmongoose package with a setting to make all 
@@ -85,7 +83,7 @@ var User = mongoose.model("User", userSchema);
 */
 app.use(session({
     secret: "I attend Saint Mary's University",
-    store: new mongoStore({mongooseConnection: mongoose.connection}),
+    //store: new mongoStore({mongooseConnection: mongoose.connection}),
     resave: false,
     saveUninitialized: false
 }));
@@ -111,69 +109,60 @@ app.use(function(req, res, next){
 
 //Home page route
 app.get("/", function(req, res) {
-    res.render("mikeLanding.html");
+    res.render("finalLauncher");
 });
 
-/* If a user is logged in, this path will take them to their blogs page. If
-   someone isn't logged in, then it will redirect them to the login page.
-*/
-app.get("/blogs", function(req, res) {
-    if(req.isAuthenticated()) {
-        res.redirect("/blogs/" + req.user.username);
-    }
-    else {
-        res.redirect("/login");
-    }
-})
 
-/* Route that redirects the user to their writer. Uses the isLoggedIn 
-   middleware function to make sure a user is authorized to access the writer.
-*/
-app.get("/blogs/new", isLoggedIn, function(req, res) {
-    res.render("createblog");
+//Display's Judi's writer
+app.get("/judiswriter", function(req, res) {
+    res.render("judisWriter");
 });
 
-/* This route is our main route. The ":/user" is the username someone types into
-   their browser url after "blogs/". There is a middleware function to make
-   sure the user exists. Mongoose finds all blogs with the given username first.
-   If a user has no blogs, then only the user who owns the blog can see it.
-   The page displays normally to others if the user has at least one blog.
-*/
-app.get("/blogs/:user", userExists, function(req, res) {
-    var userName = req.params.user;
+//Display's Michael's writer
+app.get("/quickwriter", function(req, res) {
+    res.render("quickwriter");
+});
+
+//Display's Michael's blog
+app.get("/michael", function(req, res) {
+    var userName = "michael";
     blog.find({"author.username": userName}, function(err, blogs) { 
         if (err) {
             console.log(err);
-        } else if(req.isAuthenticated()) {
-            res.render(req.user.page, { blogsVar: blogs });
-        } else if (blogs.length != 0){
-            res.render(blogs[0].author.page, { blogsVar: blogs });
         } else {
-            res.redirect("/");
+            res.render("mikesHomePage", { blogsVar: blogs });
         }
     });
 });
 
-/* Post route to create a new blog. Uses the isLoggedIn middleware function,
-   to make sure only a logged in user can create a blog. The author variable
-   is an object that contains the logged in users information. After a user
-   successfully creates a blog they will be redirected to their blogs page.
-*/
-app.post("/blogs", isLoggedIn, function(req, res) {
+//Displays Judi's blog
+app.get("/judi", function(req, res) {
+    var userName = "judi";
+    blog.find({"author.username": userName}, function(err, blogs) { 
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("judisHomePage", { blogsVar: blogs });
+        }
+    });
+});
+
+//Creates a blog
+app.post("/blog", isLoggedIn, function(req, res) {
     var title = req.body.title;
     var body = req.body.body;
+    var time = req.body.time;
     var author = {
         id: req.user._id,
-        username: req.user.username,
-        page: req.user.page
+        username: req.user.username
     };
-    var newBlog = {title: title, body: body, author: author};
+    var newBlog = {title: title, body: body, author: author, time: time};
     blog.create(newBlog, function(err, newlyCreated) {
         if (err) {
             console.log(err);
         } else {
             console.log(newlyCreated);
-            res.redirect("/blogs/" + author.username );
+            res.redirect("/" + author.username );
         }
     });
 });
@@ -200,26 +189,35 @@ app.post("/register", function(req, res) {
             return res.render("register");
         }
         passport.authenticate("local")(req, res, function() {
-            res.redirect("/blogs/" + req.user.username);
+            res.redirect("/" + req.user.username);
         });
     });
 });
 
-//Shows the login form
-app.get("/login", function(req, res) {
-    res.render("login");
+//Show Michael's login page
+app.get("/login/michael", function(req, res) {
+    res.render("mikesLoginPage");
 });
 
-/* Handles the login of users. Currently it does not alert a user if something
-   went wrong, such as an incorrect password, instead it just redirects them
-   back to the login page. I plan on adding flash error messages in the next
-   version.
-*/
-app.post("/login", passport.authenticate("local",
+//Show Judi's login page
+app.get("/login/judi", function(req, res) {
+    res.render("judisLoginPage");
+});
+
+//Handles Michael's login
+app.post("/login/michael", passport.authenticate("local",
     {
-        failureRedirect: "/login"}),
+        failureRedirect: "/login/michael"}),
         function(req, res) {
-            res.redirect("/blogs/" + req.user.username);
+            res.redirect("/michael");
+        });
+
+//Handles Judi's login
+app.post("/login/judi", passport.authenticate("local",
+    {
+        failureRedirect: "/login/judi"}),
+        function(req, res) {
+            res.redirect("/judi");
         });
         
 
@@ -234,29 +232,14 @@ app.get("/logout", function(req, res) {
 //Middleware functions
 //========
 
-//Function that checks if a user is logged in
+//Function that checks if michael is logged in
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect("/login");
+    res.redirect("/login/" + req.user.username);
 }
 
-//Function that checks if a user exists
-function userExists(req, res, next) {
-    var userName = req.params.user;
-    User.findOne({username: userName}, function(err, result) {
-        console.log(result);
-        if(err){ 
-            console.log(err);
-        } else if(!result) {
-            res.redirect("/");
-        } else {
-            next();
-        }
-
-    });
-}
 
 app.listen(3000, function() {
     console.log("Listening on port 3000");
