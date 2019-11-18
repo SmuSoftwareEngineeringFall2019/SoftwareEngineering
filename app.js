@@ -16,7 +16,7 @@ var mongoStore = require('connect-mongo')(session);
 //Configuration
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static("resources"));
 app.engine('html', require('ejs').renderFile);
 
 //Server Credentials
@@ -32,13 +32,13 @@ var connectionString = 'mongodb://' + user + ':' + password + '@' + host +
 //Database Setup
 //========
 
-mongoose.connect(connectionString, { useNewUrlParser: true, 
+mongoose.connect(connectionString, { useNewUrlParser: true,
     useUnifiedTopology: true });
 
-/* A blog schema with two main variables: title and body. Created just 
+/* A blog schema with two main variables: title and body. Created just
     specifies the date the blog was created. Published is not implemented at
     the moment, but it will allow the user to choose if they want their blog
-    to be seen by others. The author is an object that refers to a 
+    to be seen by others. The author is an object that refers to a
     corresponding user, in order to show who owns the blog.
 */
 var blogSchema = new mongoose.Schema({
@@ -65,7 +65,7 @@ var userSchema = new mongoose.Schema({
     password: String
 });
 
-/* Plugin to use the passportlocalmongoose package with a setting to make all 
+/* Plugin to use the passportlocalmongoose package with a setting to make all
    usernames lowercase, in order to not have any conflicts.
 */
 userSchema.plugin(passportLocalMongoose, {usernameLowerCase: true});
@@ -77,7 +77,7 @@ userSchema.plugin(passportLocalMongoose, {usernameLowerCase: true});
 var blog = mongoose.model("blog", blogSchema);
 var User = mongoose.model("User", userSchema);
 
-/* Passport package config. The secret field is any sentence, so I just chose 
+/* Passport package config. The secret field is any sentence, so I just chose
    a random one. Also saves the user's login indefinitely, unless they logout,
    or clear their cookies.
 */
@@ -94,7 +94,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 /* Passing currentUser to every route. This will be used to display a login and
-   register button if a user is not logged in, as well as display a logout 
+   register button if a user is not logged in, as well as display a logout
    button if a user is logged in. Can also display a "welcome <user>" messsage.
    This is for future use in the next version.
 */
@@ -120,17 +120,17 @@ app.get("/judiswriter", function(req, res) {
 
 //Display's Michael's writer
 app.get("/quickwriter", function(req, res) {
-    res.render("quickwriter");
+    res.render("quickWriter");
 });
 
 //Display's Michael's blog
 app.get("/michael", function(req, res) {
     var userName = "michael";
-    blog.find({"author.username": userName}, function(err, blogs) { 
+    blog.find({"author.username": userName}, function(err, blogs) {
         if (err) {
             console.log(err);
         } else {
-            res.render("mikesHomePage", { blogsVar: blogs });
+            res.render("michaelsHomePage", { blogsVar: blogs });
         }
     });
 });
@@ -138,7 +138,7 @@ app.get("/michael", function(req, res) {
 //Displays Judi's blog
 app.get("/judi", function(req, res) {
     var userName = "judi";
-    blog.find({"author.username": userName}, function(err, blogs) { 
+    blog.find({"author.username": userName}, function(err, blogs) {
         if (err) {
             console.log(err);
         } else {
@@ -152,17 +152,17 @@ app.post("/blog", isLoggedIn, function(req, res) {
     var title = req.body.title;
     var body = req.body.body;
     var time = req.body.time;
-    var author = {
-        id: req.user._id,
-        username: req.user.username
-    };
+   var author = {
+       id: req.user._id,
+       username: req.user.username
+   };
     var newBlog = {title: title, body: body, author: author, time: time};
     blog.create(newBlog, function(err, newlyCreated) {
         if (err) {
             console.log(err);
         } else {
             console.log(newlyCreated);
-            res.redirect("/" + author.username );
+            res.redirect("/" + author);
         }
     });
 });
@@ -176,7 +176,7 @@ app.get("/register", function(req, res) {
     res.render("register");
 });
 
-/* Uses the passport package to help with registration. It takes care of 
+/* Uses the passport package to help with registration. It takes care of
    salting and hashing the password, so that we never store the actual password
    in the database. After a user registers, it authenticates them, then redirects
    them to their new blogs page.
@@ -209,7 +209,7 @@ app.post("/login/michael", passport.authenticate("local",
     {
         failureRedirect: "/login/michael"}),
         function(req, res) {
-            res.redirect("/michael");
+            res.redirect("/quickwriter");
         });
 
 //Handles Judi's login
@@ -217,11 +217,10 @@ app.post("/login/judi", passport.authenticate("local",
     {
         failureRedirect: "/login/judi"}),
         function(req, res) {
-            res.redirect("/judi");
+            res.redirect("/judisWriter");
         });
-        
 
-//Logout route. 
+//Logout route.
 app.get("/logout", function(req, res) {
     req.session.destroy();
     req.logout();

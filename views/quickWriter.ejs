@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Writer | Start Your Story</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/quickWriter.css">
-   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="scripts/quick.js"></script>
 </head>
 
@@ -14,11 +15,11 @@
     <!----Mikes Logo DO WE NEED A LOGO??-----
     <img id="logo" alt="logo"-->
     <input id="title" onclick="checkField(0)" placeholder="Enter Title">
-    <input id="author" placeholder="Author" maxlength="10">
+    <button onclick="publish()">Publish</button>
   </header>
   <!--here i changed the class from your textArea to use-keyboard-input
   which is in the quickWriter.js file-->
-  <textarea autofocus placeholder="Share Your Story..." class="use-keyboard-input"
-  onclick="checkField(1)"  id="userText"></textarea>
+  <textarea autofocus placeholder="Share Your Story..." class="use-keyboard-input" onclick="checkField(1)" id="userText"></textarea>
 </body>
+
 </html>

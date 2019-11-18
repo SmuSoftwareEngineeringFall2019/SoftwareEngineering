@@ -1,140 +1,139 @@
 <!DOCTYPE html>
 <!--Judi's Writer -->
+
 <head>
-    <title>Judi's Writer </title>
-    <!--Paths for CSS and JavaScript files  -->
-    <link rel="stylesheet" href="css/judisJQuery.mobile-1.3.1.min.css">
-    <link rel="stylesheet" href="css/judisWriterStyle.css">
-    <!-- might delete this script below -->
-    <script src="scripts/textToInput.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="scripts/jquery-1.8.3.min.js"></script>
-    <script src="scripts/chromeFileProtocolFix.js"></script>
-    <script src="scripts/jquery.mobile-1.3.1.min.js"></script>
+  <title>Judi's Writer </title>
+  <!--Paths for CSS and JavaScript files  -->
+  <link rel="stylesheet" href="/css/judisJQuery.mobile-1.3.1.min.css">
+  <link rel="stylesheet" href="/css/judisWriterStyle.css">
+  <!-- might delete this script below -->
+  <script src="scripts/textToInput.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="scripts/jquery-1.8.3.min.js"></script>
+  <script src="scripts/chromeFileProtocolFix.js"></script>
+  <script src="scripts/jquery.mobile-1.3.1.min.js"></script>
 </head>
 
 <body onload="startUp()">
 
-<div class="twoTone">
+  <div class="twoTone">
 
-      <!-- END HEADER -->
+    <!-- END HEADER -->
 
- <!----Quick Writer Logo---->
- <center><img src ="judisWriterLogoWhite2.png" alt="logo" width="20%" style="margin-top: 50px;">
- <input id="title" onclick="checkField(0)" placeholder="Enter Title" style="font-family:'Courier New'; ">
- </center>
+    <!----Quick Writer Logo---->
+    <center><img src="/Judis Media/judisWriterLogoWhite2.png" alt="logo" width="20%" style="margin-top: 50px;">
+      <input id="title" onclick="checkField(0)" placeholder="Enter Title" style="font-family:'Courier New'; ">
+    </center>
 
 
-<!-- End Quick Writer Logo -->
+    <!-- End Quick Writer Logo -->
 
-<!------------------BUTTTONS ------------------------>
-<!-- use ui-grid-c for 4 column grid display -->
-<div class="ui-grid-c">
-  <div class="ui-block-a">
-    <input type="button" id="shareBtn" value="Share" data-icon="arrow-r" data-iconpos="right">
-  </div>
-  <div class="ui-block-b">
-    <input type="button" id="saveBtn" value="Save" data-icon="arrow-r" data-iconpos="right" style="float:right !important">
-  </div>
+    <!------------------BUTTTONS ------------------------>
+    <!-- use ui-grid-c for 4 column grid display -->
+    <div class="ui-grid-c">
+      <div class="ui-block-a">
+        <input type="button" id="shareBtn" value="Share" data-icon="arrow-r" data-iconpos="right">
+      </div>
+      <div class="ui-block-b">
+        <input type="button" id="saveBtn" value="Save" data-icon="arrow-r" data-iconpos="right" style="float:right !important">
+      </div>
 
-  <div class="ui-block-c">
-    <a href="judisHomePage.ejs" style="text-decoration: none;">
+      <div class="ui-block-c">
+        <a href="judisHomePage.ejs" style="text-decoration: none;">
       <input type="button" id="blogsBtn" value="Blogs" data-icon="arrow-r" data-iconpos="right">
     </a>
-  </div>
+      </div>
 
-  <div class="ui-block-d">
-    <a href="judisFilePage.ejs" style="text-decoration: none;">
+      <div class="ui-block-d">
+        <a href="judisFilePage.ejs" style="text-decoration: none;">
     <input type="button" id="filesBtn" data-icon="arrow-l" value="Files" style="">
   </a>
-  </div>
+      </div>
 
 
-</div>
-<!------------------ END BUTTONS HERE ------------------------>
+    </div>
+    <!------------------ END BUTTONS HERE ------------------------>
 
-<!------- Custom pop up for share button ------------->
-<div id="myModal" class="modal">
-<div class="container">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <br>
-    <br>
-    <br>
-    <!-- facebook link -->
-    <!-- replace link with judis fb -->
-    <a class="custom-share-button" href="https://www.facebook.com/sharer/sharer.ph?u=https%3A%2F%2Fjonsuh.com%2F"
-    target="_blank" style="color:white; font-weight: normal" >
+    <!------- Custom pop up for share button ------------->
+    <div id="myModal" class="modal">
+      <div class="container">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <br>
+          <br>
+          <br>
+          <!-- facebook link -->
+          <!-- replace link with judis fb -->
+          <a class="custom-share-button" href="https://www.facebook.com/sharer/sharer.ph?u=https%3A%2F%2Fjonsuh.com%2F" target="_blank" style="color:white; font-weight: normal">
   <span class="custom-share-button-label">Share on Facebook</span></a>
-<br>
-<br>
-<br>
-  <!--share to friend/family - email -->
-  <a class="custom-share-button" class="customEmailBtn" href="mailto:someone@example.com?Subject=Hello%20again"
-  target="_blank" style="background: #D66C02; color:white; font-weight: normal; ">
+          <br>
+          <br>
+          <br>
+          <!--share to friend/family - email -->
+          <a class="custom-share-button" class="customEmailBtn" href="mailto:someone@example.com?Subject=Hello%20again" target="_blank" style="background: #D66C02; color:white; font-weight: normal; ">
     <span class="custom-share-button-label">Share to Friend</span></a>
-    <br>
-    <br>
-    <br>
-    <!-- share to blog - insert link to post blog -->
-    <a class="custom-share-button" href="" target="_blank"
-    style="background:#0793AF; color:white; font-weight:normal">
+          <br>
+          <br>
+          <br>
+          <!-- share to blog - insert link to post blog -->
+          <a class="custom-share-button" href="" target="_blank" style="background:#0793AF; color:white; font-weight:normal">
       <span class="custom-share-button-label">Share to Blog</span></a>
-      <br>
-      <br>
-      <br>
-  </div>
-</div>
-</div>
+          <br>
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
 
 
 
-<!----------- end custom pop up --------------->
+    <!----------- end custom pop up --------------->
 
 
     <!--"content" format edges of the screen-->
-        <!--Text box (textarea allows the box to expand)-->
-        <!-- <p data-editable onclick="checkField(0)" id="userTitle"
+    <!--Text box (textarea allows the box to expand)-->
+    <!-- <p data-editable onclick="checkField(0)" id="userTitle"
         class="titleHeader" style="transform: translateY(-30%);" >Title-1</p> -->
-<div class="content">
-        <div id="textBox">
+    <div class="content">
+      <div id="textBox">
 
-            <textarea placeholder="Share Your Story..." class="textArea" onclick="checkField(1)" autofocus style="transform: translateY(55px); height:560px; font-family:'Courier New'; font-size:20px;" id="userText" style="width: 30% !important" ></textarea>
-        </div>
+        <textarea placeholder="Share Your Story..." class="textArea" onclick="checkField(1)" autofocus style="transform: translateY(55px); height:560px; font-family:'Courier New'; font-size:20px;" id="userText" style="width: 30% !important"></textarea>
+      </div>
 
     </div>
   </div>
-</div>
+  </div>
 
-<!--JS for customized share button -->
-<script>
-// Get the modal
-var modal = document.getElementById("myModal");
+  <!--JS for customized share button -->
+  <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("shareBtn");
+    // Get the button that opens the modal
+    var btn = document.getElementById("shareBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
 
 </body>
+
 </html>
