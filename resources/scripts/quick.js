@@ -20179,20 +20179,12 @@ function checkField(num) {
 function publish() {
     var title = document.getElementById("title").value;
     var body = document.getElementById("userText").value;
-    //var author = document.getElementById("author").value;
-    author = "Michael";
     var time = Date.now();
 
     title = encodeURIComponent(title);
     body = encodeURIComponent(body);
-    author = encodeURIComponent(author);
 
-    if (author != 'Judi' && author != "Michael") {
-        return;
-    }
-
-    //this stops escape characters from breaking the POST
-    data = 'title=' + title + '&body=' + body + '&author=' + author + "&time=" + time;
+    data = 'title=' + title + '&body=' + body + "&time=" + time;
 
     console.log(data);
     var xhttp = new XMLHttpRequest();
