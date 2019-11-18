@@ -114,12 +114,12 @@ app.get("/", function(req, res) {
 
 
 //Display's Judi's writer
-app.get("/judiswriter", function(req, res) {
+app.get("/judiswriter", isLoggedIn, function(req, res) {
     res.render("judisWriter");
 });
 
 //Display's Michael's writer
-app.get("/quickwriter", function(req, res) {
+app.get("/quickwriter", isLoggedIn, function(req, res) {
     res.render("quickWriter");
 });
 
@@ -233,10 +233,16 @@ app.get("/logout", function(req, res) {
 
 //Function that checks if michael is logged in
 function isLoggedIn(req, res, next){
+    var page;
+    if(req.path == "/quickWriter") {
+        page = "michael";
+    } else {
+        page = "judi";
+    }
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect("/login/" + req.user.username);
+    res.redirect("/login/" + page);
 }
 
 
