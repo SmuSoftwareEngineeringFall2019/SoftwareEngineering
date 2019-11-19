@@ -12,12 +12,15 @@ var LocalStrategy = require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
+var methodOverride = require("method-override");
 
 //Configuration
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("resources"));
 app.engine('html', require('ejs').renderFile);
+mongoose.set('useFindAndModify', false);
+app.use(methodOverride("_method"));
 
 //Server Credentials
 var user = '';
@@ -120,7 +123,7 @@ app.get("/judiswriter", isLoggedIn, function(req, res) {
 
 //Display's Michael's writer
 app.get("/quickwriter", isLoggedIn, function(req, res) {
-    res.render("quickWriter");
+    res.render("quickWriter", {blog: null});
 });
 
 //Display's Michael's blog
@@ -147,6 +150,39 @@ app.get("/judi", function(req, res) {
     });
 });
 
+//Displays only one of Michael's blogs
+app.get("/michael/:id", function(req, res) {
+    blog.findById(req.params.id, function(err, blog){
+        if(err){
+            res.redirect("/michael");
+        } else {
+            res.render("mikesSingleBlogDisplay", {blog: blog});
+        }
+    });
+});
+
+//Displays only one of Judi's blogs
+app.get("/judi/:id", function(req, res) {
+    blog.findById(req.params.id, function(err, blog){
+        if(err){
+            res.redirect("/judi");
+        } else {
+            res.render("judisSingleBlogDisplay", {blog: blog});
+        }
+    });
+});
+
+app.get("/michael/:id/edit", isLoggedIn, function(req, res) {
+    blog.findById(req.params.id, function(err, blog) {
+        if(err) {
+            console.log(err);
+            res.redirect("/michael");
+        } else {
+            res.render("quickWriter", {blog: blog});
+        }
+    });
+});
+
 //Creates a blog
 app.post("/blog", isLoggedIn, function(req, res) {
     var title = req.body.title;
@@ -162,7 +198,32 @@ app.post("/blog", isLoggedIn, function(req, res) {
             console.log(err);
         } else {
             console.log(newlyCreated);
-            res.redirect("/" + author);
+        }
+    });
+});
+
+//Edits a blog
+app.put("/michael/:id", isLoggedIn, function(req, res) {
+    var title = req.body.title;
+    var body = req.body.body;
+    var time = req.body.time;
+    var editedBlog = {title: title, body: body, time: time};
+    blog.findByIdAndUpdate(req.params.id, editedBlog, function(err, blog){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(blog);
+        }
+    });
+});
+
+//Deletes a blog
+app.delete("/michael/:id", isLoggedIn, function(req, res) {
+    blog.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/michael");
+        } else {
+            res.redirect("/michael");
         }
     });
 });
@@ -234,13 +295,15 @@ app.get("/logout", function(req, res) {
 //Function that checks if michael is logged in
 function isLoggedIn(req, res, next){
     var page;
-    if(req.path == "/quickWriter") {
+    var pattern = /^\/michael\/.*/;
+
+    if(req.isAuthenticated()){
+        return next();
+    }
+    if(req.path == "/quickWriter" || pattern.test(req.path)) {
         page = "michael";
     } else {
         page = "judi";
-    }
-    if(req.isAuthenticated()){
-        return next();
     }
     res.redirect("/login/" + page);
 }
