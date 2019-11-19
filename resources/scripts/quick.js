@@ -10,6 +10,13 @@ var curs;
 var start;
 var end;
 
+//Change names of local storage depending on user
+var wasSaved;
+var localPost;
+
+//Var to keep track of whether the last button pushed was a predicted word
+var lastPred = false;
+
 //Boards
 var lowerBoard = ["", "", "", "", "",
     "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "backspace",
@@ -7850,7 +7857,6 @@ var dictionary = [
     "distributions",
     "vaccine",
     "belize",
-    "crap",
     "fate",
     "viewpicture",
     "promised",
@@ -8946,7 +8952,6 @@ var dictionary = [
     "vg",
     "bald",
     "filme",
-    "craps",
     "fuji",
     "frost",
     "leon",
@@ -14382,7 +14387,6 @@ var dictionary = [
     "harmless",
     "ics",
     "apa",
-    "bitches",
     "sting",
     "urbana",
     "bravo",
@@ -15263,7 +15267,6 @@ var dictionary = [
     "songwriter",
     "suspicion",
     "disadvantage",
-    "bastard",
     "shania",
     "coaster",
     "spends",
@@ -19901,51 +19904,116 @@ var dictionary = [
     "bizjournalshire"
 ];
 
+//Save current body
 try {
     currentStack = [document.getElementById("userText").value];
 } catch (typeError)
 {
     currentStack = [""];
 }
-function startUp() {
-    getCursor();
-    //CHECK LOCAL STORAGE FOR ITENM OF LAST SESSION AND THEN FILL IN DATA
 
+//Function run onload. Check if changes were saved and react accordingly,
+//Store current blog into local storage to determine whether changes
+//have been made or not.
+function startUp() {
+    //Check which user is active
+
+    wasSaved = window.location.href + "WasSaved";
+    localPost = window.location.href + "Local";
+
+    //Check local storage to see if changes were saved
+    try {
+        var check = localStorage.getItem(wasSaved);
+        var oldCopy = localStorage.getItem(localPost);
+        if (JSON.parse(check).state === "no") {
+            //If changes not saved, load in the unsaved work and notify
+            //user
+            document.getElementById("title").value = JSON.parse(oldCopy).title;
+            document.getElementById("userText").value = JSON.parse(oldCopy).body;
+            alert("You made changes during your last visit that weren't saved! Leaving this page again without saving will result in those changes being lost.");
+            localStorage.removeItem(wasSaved);
+            localStorage.removeItem(localPost);
+        }
+    } catch (e) {
+    }
+    //Store Current state into local storage
+    var localCopy = {title: document.getElementById("title").value,
+        body: document.getElementById("userText").value
+    };
+    localStorage.setItem(localPost, JSON.stringify(localCopy));
+    getCursor();
+    predict();
+    updateBoard();
+
+    //Listen for when a key is released. Writer works with hardwired keyboard
+    //and onscreen keyboard together.
     document.addEventListener('keyup', function (event) {
         getCursor();
         if (focus === "userText") {
+            if (lastPred && (document.getElementById("userText").value.substring(start -1, start) === "." ||
+                    document.getElementById("userText").value.substring(start -1, start) === "!"  ||
+                    document.getElementById("userText").value.substring(start -1, start) === "?" ||
+                    document.getElementById("userText").value.substring(start -1, start) === "," ||
+                    document.getElementById("userText").value.substring(start -1, start) === "\"" ||
+                    document.getElementById("userText").value.substring(start -1, start) === "'" )) {
+            //A single letter is added
+            //Add the word to the textarea
+            var nextString = document.getElementById(focus).value;
+            //Using cursor location, determine where the letter is to be added
+            var first = nextString.substring(0, start - 2);
+            var last = nextString.substring(end -1, nextString.length);
+
+            //add the letter
+            document.getElementById(focus).value = first + last;
+            }
             updateStack();
             predict();
             updateBoard();
+            lastPred = false;
         }
     });
 }
 
-/**
+/** 
  * Adds a word to the textarea
- *
- * @param {String} word The word to be added to the textarea
+ * 
+ * @param {String} word The word to be added to the textarea 
  **/
 function addWord(word) {
     document.getElementById(focus).focus();
     switch (word.length) {
         case 0:
+            //Empty Predicted word is selected. Do nothing and re-establish
+            //cursor at end of highlighted area
             document.getElementById(focus).setSelectionRange(end, end);
             getCursor();
             break;
         case 1:
+            //If a period is being pressed and predict was last used, remove
+            //space.
+            if ((word === "." || word === "!" || word === "?" || word === "," ||
+            word === "\"" || word === "'") && lastPred === true) {
+                start = start - 1;
+            }
+            //A single letter is added
             //Add the word to the textarea
             var nextString = document.getElementById(focus).value;
+            //Using cursor location, determine where the letter is to be added
             var first = nextString.substring(0, start);
             var last = nextString.substring(end, nextString.length);
 
+            //add the letter
             document.getElementById(focus).value = first + word + last;
+            //If the cursor is only highlighting a single character, move it
+            //one space to the right
             if (start === end) {
                 start++;
                 end++;
                 document.getElementById(focus).setSelectionRange(start, end);
                 getCursor();
             } else {
+                //If soemthing was highlighted, it is now replaced by a single
+                //character. Move cursor to start location + 1
                 start++;
                 end = start;
                 document.getElementById(focus).setSelectionRange(start, end);
@@ -19956,13 +20024,17 @@ function addWord(word) {
             }
             predict();
             updateBoard();
+            lastPred = false;
             break;
 
         default:
+            //Predicted word is selected
+            //If something is highlighted, reapply focus and do nothing
             if (curs.selectionStart === curs.selectionEnd) {
                 var tempTracker = start;
                 var tempString = [];
                 var fill = "";
+                //Move left until the start of the word is found
                 while (document.getElementById(focus).value.substring(tempTracker - 1, tempTracker) !== " " &&
                         document.getElementById(focus).value.substring(tempTracker - 1, tempTracker) !== "" &&
                         document.getElementById(focus).value.substring(tempTracker - 1, tempTracker) !== "\n")
@@ -19970,6 +20042,7 @@ function addWord(word) {
                     tempString.push(document.getElementById(focus).value.substring(tempTracker - 1, tempTracker));
                     tempTracker--;
                 }
+                //Fill in missing letters to complete the word
                 fill = word.substring(tempString.length, word.length);
                 document.getElementById(focus).focus();
                 //Add the word to the textarea
@@ -19977,15 +20050,17 @@ function addWord(word) {
                 var first = nextString.substring(0, start);
                 var last = nextString.substring(end, nextString.length);
 
-                document.getElementById(focus).value = first + fill + last;
+                document.getElementById(focus).value = first + fill + " " + last;
 
-                start = start + fill.length;
-                end = end + fill.length;
+                //Move cursor to end of word
+                start = start + fill.length + 1;
+                end = end + fill.length + 1;
                 if (focus === "userText") {
                     updateStack();
                 }
                 predict();
                 updateBoard();
+                lastPred = true;
             }
             document.getElementById(focus).setSelectionRange(end, end);
             getCursor();
@@ -19993,7 +20068,10 @@ function addWord(word) {
     }
 }
 
+//Each change updates the board so predictive text buttons are updated
+//in real time
 function updateBoard() {
+    //Reconstruct keyboard
     var board;
     if (Keyboard.properties.capsLock) {
         board = capBoard;
@@ -20010,11 +20088,13 @@ function updateBoard() {
     }
 }
 
+//Determine predicted words
 function predict() {
     //predictive
     var tempTracker = start;
     var tempString = [];
     var predict = "";
+    //Find start of word
     while (document.getElementById(focus).value.substring(tempTracker - 1, tempTracker) !== " " &&
             document.getElementById(focus).value.substring(tempTracker - 1, tempTracker) !== "" &&
             document.getElementById(focus).value.substring(tempTracker - 1, tempTracker) !== "\n")
@@ -20028,6 +20108,7 @@ function predict() {
     }
     predict = predict.toLowerCase();
 
+//Find 5 first words in dictionary with same start as current string
     var d = 0;
     var b = 0;
     while (d < 5 && b < dictionary.length) {
@@ -20047,8 +20128,6 @@ function predict() {
             capBoard[y] = "";
         }
     }
-
-
 }
 
 //Backspace/delete highlighted text with respect to cursor position
@@ -20057,6 +20136,7 @@ function del() {
 
     var curString = document.getElementById(focus).value;
 
+    //If cursor is in one spot, remove last character
     if (start === end) {
         document.getElementById(focus).value =
                 curString.substring(0, start - 1)
@@ -20068,7 +20148,7 @@ function del() {
         document.getElementById(focus).setSelectionRange(start, end);
         getCursor();
     } else {
-
+        //Else, delete current highlighted area and move cursor
         document.getElementById(focus).value =
                 curString.substring(0, start)
                 + curString.substring(end, curString.length);
@@ -20082,12 +20162,16 @@ function del() {
     }
     predict();
     updateBoard();
+    predLast = false;
 }
 
+//Delete the word the cursor is currently on (including space before word)
 function delword() {
+    //If a section is highlighted, Call del() to delte it
     if (start !== end) {
         del();
     } else {
+        //Else, locate left and right bounds of word and remove the word.
         document.getElementById(focus).focus();
         var curText = document.getElementById(focus).value;
 
@@ -20106,14 +20190,17 @@ function delword() {
                 && start + j <= curText.length) {
             j++;
         }
-
+        //Remove word using calculated bounds
         document.getElementById(focus).value = curText.substring(0, start - i - 1)
                 + curText.substring(start + j, curText.length);
+        //if the cursor is not at start, move it left 1 extra to account for
+        //removed space. Otherwise set start to 0
         if (start > 0) {
-            start = start - i -1;
-        }
-        else start = 0;
-        if(start < 0){
+            start = start - i - 1;
+        } else
+            start = 0;
+        //If moving left caused start to become negative, change it to 0
+        if (start < 0) {
             start = 0;
         }
         end = start;
@@ -20124,6 +20211,7 @@ function delword() {
         getCursor();
         predict();
         updateBoard();
+        predLast = false;
     }
 }
 
@@ -20135,6 +20223,7 @@ function undo() {
         currentStack.push(lastText);
         document.getElementById("userText").value = lastText;
         getCursor();
+        predLast = false;
     }
 }
 
@@ -20146,6 +20235,7 @@ function redo() {
         document.getElementById("userText").value =
                 currentStack[currentStack.length - 1];
         getCursor();
+        predLast = false;
     }
 }
 
@@ -20175,11 +20265,47 @@ function checkField(num) {
     getCursor();
 }
 
+//On close, check if the current data is the same as the most recent save.
+//If not, Save it locally as well as indicator saying it was not saved.
+function checkSave() {
+    var notSave = {state: "no"};
+    var yesSave = {state: "yes"};
+    try {
+        var save = localStorage.getItem(localPost);
+    } catch (e) {
+    }
+    ;
+    //If it is saved, do nothing
+    if (document.getElementById("title").value === JSON.parse(save).title &&
+            document.getElementById("userText").value === JSON.parse(save).body)
+    {
+        localStorage.setItem(wasSaved, JSON.stringify(yesSave));
+        return;
+    } else {
+        //Else save locally
+        var localCopy = {title: document.getElementById("title").value,
+            body: document.getElementById("userText").value
+        };
+        localStorage.setItem(localPost, JSON.stringify(localCopy));
+        localStorage.setItem(wasSaved, JSON.stringify(notSave));
+        return;
+    }
+}
+
+//Publish current session to database
 //Publish current session to database
 function publish() {
+    localStorage.removeItem(wasSaved);
+    localStorage.removeItem(localPost);
     var title = document.getElementById("title").value;
     var body = document.getElementById("userText").value;
     var time = Date.now();
+
+    //When published, Save locally as most recently saved copy
+    var localCopy = {title: document.getElementById("title").value,
+        body: document.getElementById("userText").value
+    };
+    localStorage.setItem(localPost, JSON.stringify(localCopy));
 
     title = encodeURIComponent(title);
     body = encodeURIComponent(body);
@@ -20193,9 +20319,11 @@ function publish() {
     xhttp.send(data);
     alert("success");
 }
+
 //Edit a post on the database
 function edit() {
-    localStorage.clear();
+     localStorage.removeItem(wasSaved);
+    localStorage.removeItem(localPost);
     var title = document.getElementById("title").value;
     var body = document.getElementById("userText").value;
     var time = Date.now();
@@ -20204,9 +20332,9 @@ function edit() {
 
     //When published, Save locally as most recently saved copy
     var localCopy = {title: document.getElementById("title").value,
-        body: document.getElementById("userText").value,
+        body: document.getElementById("userText").value
     };
-    localStorage.setItem("local", JSON.stringify(localCopy));
+    localStorage.setItem(localPost, JSON.stringify(localCopy));
 
     title = encodeURIComponent(title);
     body = encodeURIComponent(body);
@@ -20221,7 +20349,6 @@ function edit() {
     alert("success");
 }
 
-
 //Gets cursor position in the string
 function getCursor() {
 
@@ -20230,6 +20357,7 @@ function getCursor() {
     end = curs.selectionEnd;
 }
 
+//create keyboard
 const Keyboard = {
     elements: {
         main: null,
@@ -20391,3 +20519,4 @@ const Keyboard = {
 window.addEventListener("DOMContentLoaded", function () {
     Keyboard.init();
 });
+
