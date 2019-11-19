@@ -20193,6 +20193,33 @@ function publish() {
     xhttp.send(data);
     alert("success");
 }
+//Edit a post on the database
+function edit() {
+    localStorage.clear();
+    var title = document.getElementById("title").value;
+    var body = document.getElementById("userText").value;
+    var time = Date.now();
+    var blogId = document.getElementById('blogId').innerHTML;
+    blogId = JSON.parse(blogId);
+
+    //When published, Save locally as most recently saved copy
+    var localCopy = {title: document.getElementById("title").value,
+        body: document.getElementById("userText").value,
+    };
+    localStorage.setItem("local", JSON.stringify(localCopy));
+
+    title = encodeURIComponent(title);
+    body = encodeURIComponent(body);
+
+    data = 'title=' + title + '&body=' + body + "&time=" + time;
+
+    console.log(blogId);
+    var xhttp = new XMLHttpRequest();
+    xhttp.open('put', '/michael/' + blogId, true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhttp.send(data);
+    alert("success");
+}
 
 
 //Gets cursor position in the string
