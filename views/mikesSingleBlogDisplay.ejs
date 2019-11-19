@@ -91,6 +91,10 @@ body {
       </center>
 
         </div>
+        <a href="/michael/<%=blog._id%>/edit">Update Blog</a>
+        <form action="/michael/<%=blog._id%>?_method=DELETE" method="POST">
+          <br><input type="submit" value="Delete Blog">
+        </form>
       </section>
     </div>
 
