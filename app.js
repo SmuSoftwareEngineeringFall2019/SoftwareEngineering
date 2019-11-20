@@ -118,12 +118,28 @@ app.get("/", function(req, res) {
 
 //Display's Judi's writer
 app.get("/judiswriter", isLoggedIn, function(req, res) {
-    res.render("judisWriter");
+    res.render("judisWriter", {blog: null});
 });
 
 //Display's Michael's writer
 app.get("/quickwriter", isLoggedIn, function(req, res) {
     res.render("quickWriter", {blog: null});
+});
+
+// app.get("/:writer((quick|judis)writer)", isLoggedIn, function(req, res) {
+//     res.render(req.params.path, {blog: null});
+// });
+
+//Display's Michael's blog
+app.get("/test", function(req, res) {
+    var userName = "michael";
+    blog.find({"author.username": userName}, function(err, blogs) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("mikesFilesPage", { blogsVar: blogs });
+        }
+    });
 });
 
 //Display's Michael's blog
@@ -172,13 +188,20 @@ app.get("/judi/:id", function(req, res) {
     });
 });
 
-app.get("/michael/:id/edit", isLoggedIn, function(req, res) {
+app.get("/:user(michael|judi)/:id/edit", isLoggedIn, function(req, res) {
     blog.findById(req.params.id, function(err, blog) {
+        var page;
+        if(req.params.user == "michael") {
+            page = "quickWriter";
+        } else {
+            page = "judisWriter";
+        }
+
         if(err) {
             console.log(err);
-            res.redirect("/michael");
+            res.redirect("/" + req.params.user);
         } else {
-            res.render("quickWriter", {blog: blog});
+            res.render(page, {blog: blog});
         }
     });
 });
@@ -203,7 +226,7 @@ app.post("/blog", isLoggedIn, function(req, res) {
 });
 
 //Edits a blog
-app.put("/michael/:id", isLoggedIn, function(req, res) {
+app.put("/:user(michael|judi)/:id", isLoggedIn, function(req, res) {
     var title = req.body.title;
     var body = req.body.body;
     var time = req.body.time;
@@ -218,12 +241,12 @@ app.put("/michael/:id", isLoggedIn, function(req, res) {
 });
 
 //Deletes a blog
-app.delete("/michael/:id", isLoggedIn, function(req, res) {
+app.delete("/:user(michael|judi)/:id", isLoggedIn, function(req, res) {
     blog.findByIdAndRemove(req.params.id, function(err){
         if(err){
-            res.redirect("/michael");
+            res.redirect("/" + req.params.user);
         } else {
-            res.redirect("/michael");
+            res.redirect("/" + req.params.user);
         }
     });
 });
