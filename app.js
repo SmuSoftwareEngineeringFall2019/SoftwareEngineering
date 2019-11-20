@@ -136,6 +136,25 @@ app.get("/:userFile((michael|judi)sfile)", isLoggedIn, function(req, res) {
     });
 });
 
+//Creates a blog
+app.post("/blog", isLoggedIn, function(req, res) {
+    var title = req.body.title;
+    var body = req.body.body;
+    var time = req.body.time;
+   var author = {
+       id: req.user._id,
+       username: req.user.username
+   };
+    var newBlog = {title: title, body: body, author: author, time: time};
+    blog.create(newBlog, function(err, newlyCreated) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(newlyCreated);
+        }
+    });
+});
+
 //Displays Michael or Judi's blog list
 app.get("/:user(michael|judi)", function(req, res) {
     var userName = req.params.user;
@@ -160,7 +179,7 @@ app.get("/:user(michael|judi)/:id", function(req, res) {
 });
 
 //Displays one of Michael or Judi's blogs in the quickwriter
-app.get("/:user(michael|judi)/:id/edit", isLoggedIn, function(req, res) {
+app.get("/:user(michael|judi)/:id/edit", checkOwnerShip, function(req, res) {
     blog.findById(req.params.id, function(err, blog) {
         if(err) {
             console.log(err);
@@ -171,27 +190,8 @@ app.get("/:user(michael|judi)/:id/edit", isLoggedIn, function(req, res) {
     });
 });
 
-//Creates a blog
-app.post("/blog", isLoggedIn, function(req, res) {
-    var title = req.body.title;
-    var body = req.body.body;
-    var time = req.body.time;
-   var author = {
-       id: req.user._id,
-       username: req.user.username
-   };
-    var newBlog = {title: title, body: body, author: author, time: time};
-    blog.create(newBlog, function(err, newlyCreated) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(newlyCreated);
-        }
-    });
-});
-
 //Edits a blog
-app.put("/:user(michael|judi)/:id", isLoggedIn, function(req, res) {
+app.put("/:user(michael|judi)/:id", checkOwnerShip, function(req, res) {
     var title = req.body.title;
     var body = req.body.body;
     var time = req.body.time;
@@ -206,7 +206,7 @@ app.put("/:user(michael|judi)/:id", isLoggedIn, function(req, res) {
 });
 
 //Deletes a blog
-app.delete("/:user(michael|judi)/:id", isLoggedIn, function(req, res) {
+app.delete("/:user(michael|judi)/:id", checkOwnerShip, function(req, res) {
     blog.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/" + req.params.user);
@@ -292,6 +292,23 @@ function isLoggedIn(req, res, next){
     res.redirect("/login/" + page);
 }
 
+function checkOwnerShip(req, res, next){
+    if(req.isAuthenticated()){
+        blog.findById(req.params.id, function(err, foundBlog){
+            if(err){
+                res.redirect("back");
+            } else {
+                if(foundBlog.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        });
+    } else {
+        res.redirect("back");
+    }
+}
 
 app.listen(3000, function() {
     console.log("Listening on port 3000");
