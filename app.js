@@ -13,6 +13,7 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 var methodOverride = require("method-override");
+var flash = require('connect-flash');
 
 //Configuration
 app.set("view engine", "ejs");
@@ -21,6 +22,7 @@ app.use(express.static("resources"));
 app.engine('html', require('ejs').renderFile);
 mongoose.set('useFindAndModify', false);
 app.use(methodOverride("_method"));
+app.use(flash());
 
 //Server Credentials
 var user = '';
@@ -245,24 +247,22 @@ app.post("/register", function(req, res) {
 
 //Displays Michael or Judi's login page
 app.get("/login/:user(michael|judi)", function(req, res) {
-    res.render(req.params.user + "sLoginPage");
+    res.render(req.params.user + "sLoginPage", {message: req.flash("error")});
 });
 
 //Handles Michael's login
 app.post("/login/michael", passport.authenticate("local",
     {
-        failureRedirect: "/login/michael"}),
-        function(req, res) {
-            res.redirect("/michaelsWriter");
-        });
+        successRedirect: "/michaelsWriter",
+        failureRedirect: "/login/michael",
+        failureFlash: true}));
 
 //Handles Judi's login
 app.post("/login/judi", passport.authenticate("local",
     {
-        failureRedirect: "/login/judi"}),
-        function(req, res) {
-            res.redirect("/judisWriter");
-        });
+        successRedirect: "/judisWriter",
+        failureRedirect: "/login/judi",
+        failureFlash: true}));
 
 //Logout route.
 app.get("/logout", function(req, res) {
@@ -288,24 +288,28 @@ function isLoggedIn(req, res, next){
     } else {
         page = "judi";
     }
-    console.log(req.path);
+    req.flash("error", "You must be logged in to do that");
     res.redirect("/login/" + page);
 }
 
+//Function that checks ownership of a blog
 function checkOwnerShip(req, res, next){
     if(req.isAuthenticated()){
         blog.findById(req.params.id, function(err, foundBlog){
             if(err){
+                req.flash("error", "Blog not found");
                 res.redirect("back");
             } else {
                 if(foundBlog.author.id.equals(req.user._id)){
                     next();
                 } else {
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
         });
     } else {
+        req.flash("error", "You must be logged in to do that");
         res.redirect("back");
     }
 }
