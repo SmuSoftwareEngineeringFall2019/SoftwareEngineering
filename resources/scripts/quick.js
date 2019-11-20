@@ -20329,6 +20329,8 @@ function edit() {
     var time = Date.now();
     var blogId = document.getElementById('blogId').innerHTML;
     blogId = JSON.parse(blogId);
+    var user = document.getElementById('userId').innerHTML;
+    user = JSON.parse(user);
 
     //When published, Save locally as most recently saved copy
     var localCopy = {title: document.getElementById("title").value,
@@ -20343,7 +20345,7 @@ function edit() {
 
     console.log(blogId);
     var xhttp = new XMLHttpRequest();
-    xhttp.open('put', '/michael/' + blogId, true);
+    xhttp.open('put', '/' + user + '/' + blogId, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send(data);
     alert("success");
