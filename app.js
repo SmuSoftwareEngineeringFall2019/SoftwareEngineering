@@ -122,8 +122,8 @@ app.get("/judiswriter", isLoggedIn, function(req, res) {
 });
 
 //Display's Michael's writer
-app.get("/quickwriter", isLoggedIn, function(req, res) {
-    res.render("quickWriter", {blog: null});
+app.get("/michaelsWriter", isLoggedIn, function(req, res) {
+    res.render("michaelsWriter", {blog: null});
 });
 
 // app.get("/:writer((quick|judis)writer)", isLoggedIn, function(req, res) {
@@ -137,7 +137,7 @@ app.get("/test", function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("mikesFilesPage", { blogsVar: blogs });
+            res.render("michaelsFilePage", { blogsVar: blogs });
         }
     });
 });
@@ -172,7 +172,7 @@ app.get("/michael/:id", function(req, res) {
         if(err){
             res.redirect("/michael");
         } else {
-            res.render("mikesSingleBlogDisplay", {blog: blog});
+            res.render("michaelsSingleBlog", {blog: blog});
         }
     });
 });
@@ -183,7 +183,7 @@ app.get("/judi/:id", function(req, res) {
         if(err){
             res.redirect("/judi");
         } else {
-            res.render("judisSingleBlogDisplay", {blog: blog});
+            res.render("judisSingleBlog", {blog: blog});
         }
     });
 });
@@ -192,7 +192,7 @@ app.get("/:user(michael|judi)/:id/edit", isLoggedIn, function(req, res) {
     blog.findById(req.params.id, function(err, blog) {
         var page;
         if(req.params.user == "michael") {
-            page = "quickWriter";
+            page = "michaelsWriter";
         } else {
             page = "judisWriter";
         }
@@ -280,7 +280,7 @@ app.post("/register", function(req, res) {
 
 //Show Michael's login page
 app.get("/login/michael", function(req, res) {
-    res.render("mikesLoginPage");
+    res.render("michaelsLoginPage");
 });
 
 //Show Judi's login page
@@ -293,7 +293,7 @@ app.post("/login/michael", passport.authenticate("local",
     {
         failureRedirect: "/login/michael"}),
         function(req, res) {
-            res.redirect("/quickwriter");
+            res.redirect("/michaelsWriter");
         });
 
 //Handles Judi's login
@@ -323,7 +323,7 @@ function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
-    if(req.path == "/quickWriter" || pattern.test(req.path)) {
+    if(req.path == pattern.test(req.path)) {
         page = "michael";
     } else {
         page = "judi";
