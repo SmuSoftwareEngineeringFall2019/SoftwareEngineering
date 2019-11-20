@@ -115,93 +115,58 @@ app.get("/", function(req, res) {
     res.render("finalLauncher");
 });
 
-
-//Display's Judi's writer
-app.get("/judiswriter", isLoggedIn, function(req, res) {
-    res.render("judisWriter", {blog: null});
-});
-
-//Display's Michael's writer
-app.get("/michaelsWriter", isLoggedIn, function(req, res) {
-    res.render("michaelsWriter", {blog: null});
-});
-
-// app.get("/:writer((quick|judis)writer)", isLoggedIn, function(req, res) {
-//     res.render(req.params.path, {blog: null});
-// });
-
-//Display's Michael's blog
-app.get("/test", function(req, res) {
-    var userName = "michael";
-    blog.find({"author.username": userName}, function(err, blogs) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render("michaelsFilePage", { blogsVar: blogs });
-        }
-    });
+//Display either michael or judi's writer
+app.get("/:writer((michael|judi)swriter)", isLoggedIn, function(req, res) {
+    var path = (req.path).replace("/", "");
+    path = path.replace(/writer/, "Writer");
+    res.render(path, {blog: null});
 });
 
 //Display's Michael's blog
-app.get("/michael", function(req, res) {
-    var userName = "michael";
+app.get("/:userFile((michael|judi)sfile)", isLoggedIn, function(req, res) {
+    var userName = req.user.username;
     blog.find({"author.username": userName}, function(err, blogs) {
         if (err) {
             console.log(err);
         } else {
-            res.render("michaelsHomePage", { blogsVar: blogs });
+            var path = (req.path).replace("/", "");
+            path = path.replace(/file/, "FilePage");
+            res.render(path, { blogsVar: blogs });
         }
     });
 });
 
-//Displays Judi's blog
-app.get("/judi", function(req, res) {
-    var userName = "judi";
+//Displays Michael or Judi's blog list
+app.get("/:user(michael|judi)", function(req, res) {
+    var userName = req.params.user;
     blog.find({"author.username": userName}, function(err, blogs) {
         if (err) {
             console.log(err);
         } else {
-            res.render("judisHomePage", { blogsVar: blogs });
+            res.render(req.params.user + "sHomePage", { blogsVar: blogs });
         }
     });
 });
 
-//Displays only one of Michael's blogs
-app.get("/michael/:id", function(req, res) {
+//Displays one of Michael or Judi's blogs
+app.get("/:user(michael|judi)/:id", function(req, res) {
     blog.findById(req.params.id, function(err, blog){
         if(err){
-            res.redirect("/michael");
+            res.redirect("/" + req.params.user);
         } else {
-            res.render("michaelsSingleBlog", {blog: blog});
+            res.render(req.params.user + "sSingleBlog", {blog: blog});
         }
     });
 });
 
-//Displays only one of Judi's blogs
-app.get("/judi/:id", function(req, res) {
-    blog.findById(req.params.id, function(err, blog){
-        if(err){
-            res.redirect("/judi");
-        } else {
-            res.render("judisSingleBlog", {blog: blog});
-        }
-    });
-});
-
+//Displays one of Michael or Judi's blogs in the quickwriter
 app.get("/:user(michael|judi)/:id/edit", isLoggedIn, function(req, res) {
     blog.findById(req.params.id, function(err, blog) {
-        var page;
-        if(req.params.user == "michael") {
-            page = "michaelsWriter";
-        } else {
-            page = "judisWriter";
-        }
-
         if(err) {
             console.log(err);
             res.redirect("/" + req.params.user);
         } else {
-            res.render(page, {blog: blog});
+            res.render(req.params.user + "sWriter", {blog: blog});
         }
     });
 });
@@ -278,14 +243,9 @@ app.post("/register", function(req, res) {
     });
 });
 
-//Show Michael's login page
-app.get("/login/michael", function(req, res) {
-    res.render("michaelsLoginPage");
-});
-
-//Show Judi's login page
-app.get("/login/judi", function(req, res) {
-    res.render("judisLoginPage");
+//Displays Michael or Judi's login page
+app.get("/login/:user(michael|judi)", function(req, res) {
+    res.render(req.params.user + "sLoginPage");
 });
 
 //Handles Michael's login
@@ -318,16 +278,17 @@ app.get("/logout", function(req, res) {
 //Function that checks if michael is logged in
 function isLoggedIn(req, res, next){
     var page;
-    var pattern = /^\/michael\/.*/;
+    var pattern = /^\/michael.*/;
 
     if(req.isAuthenticated()){
         return next();
     }
-    if(req.path == pattern.test(req.path)) {
+    if(pattern.test(req.path)) {
         page = "michael";
     } else {
         page = "judi";
     }
+    console.log(req.path);
     res.redirect("/login/" + page);
 }
 
