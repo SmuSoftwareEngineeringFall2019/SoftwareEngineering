@@ -226,7 +226,7 @@ app.delete("/:user(michael|judi)/:id", checkOwnerShip, function(req, res) {
         if(err){
             res.redirect("/" + req.params.user);
         } else {
-            res.redirect("/" + req.params.user);
+            res.redirect("/" + req.params.user + "sfile);
         }
     });
 });
