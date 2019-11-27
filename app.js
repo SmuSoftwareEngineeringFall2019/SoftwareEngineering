@@ -173,7 +173,7 @@ app.get("/:user(michael|judi)/latest", function(req, res){
 //Displays Michael or Judi's blog list
 app.get("/:user(michael|judi)", function(req, res) {
     var userName = req.params.user;
-    blog.find({"author.username": userName}, function(err, blogs) {
+    blog.find({"author.username": userName, published: true}, function(err, blogs) {
         if (err) {
             console.log(err);
         } else {
