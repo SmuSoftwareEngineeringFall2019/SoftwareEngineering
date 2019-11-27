@@ -205,6 +205,19 @@ app.get("/:user(michael|judi)/:id/edit", checkOwnerShip, function(req, res) {
     });
 });
 
+//Responsible for isPublished funtionality
+app.post("/:user(michael|judi)/:id", function(req, res){
+    var published = req.body.published;
+    var editedBlog = {published: published};
+    blog.findByIdAndUpdate(req.params.id, editedBlog, function(err, blog){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(blog);
+        }
+    });
+});
+
 //Edits a blog
 app.put("/:user(michael|judi)/:id", checkOwnerShip, function(req, res) {
     var title = req.body.title;
