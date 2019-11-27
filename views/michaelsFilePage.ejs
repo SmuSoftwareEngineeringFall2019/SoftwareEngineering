@@ -25,7 +25,7 @@
     published = encodeURIComponent(published);
     data = 'published=' + published;
     var xhttp = new XMLHttpRequest();
-    xhttp.open('put', '/michael/' + blogId, true);
+    xhttp.open('post', '/michael/' + blogId, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send(data);
    }
