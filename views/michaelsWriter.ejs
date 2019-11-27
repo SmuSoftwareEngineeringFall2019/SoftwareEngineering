@@ -24,6 +24,7 @@
 
     <%if (!blog) {%>
     <button onclick="publish()">Publish</button>
+    <span id="username" hidden><%= JSON.stringify(userName);%></span>
     <%} else {%>
     <button onclick="edit()">Submit Changes</button>
     <%}%>
