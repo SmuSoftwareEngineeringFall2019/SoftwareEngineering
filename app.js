@@ -212,9 +212,7 @@ app.post("/:user(michael|judi)/:id", function(req, res){
     blog.findByIdAndUpdate(req.params.id, editedBlog, function(err, blog){
         if(err){
             console.log(err);
-        } else {
-            console.log(blog);
-        }
+        } 
     });
 });
 
@@ -227,9 +225,7 @@ app.put("/:user(michael|judi)/:id", checkOwnerShip, function(req, res) {
     blog.findByIdAndUpdate(req.params.id, editedBlog, function(err, blog){
         if(err){
             console.log(err);
-        } else {
-            console.log(blog);
-        }
+        } 
     });
 });
 
