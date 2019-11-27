@@ -121,7 +121,8 @@ app.get("/", function(req, res) {
 app.get("/:writer((michael|judi)swriter)", isLoggedIn, function(req, res) {
     var path = (req.path).replace("/", "");
     path = path.replace(/writer/, "Writer");
-    res.render(path, {blog: null});
+    var userName = req.user.username;
+    res.render(path, {blog: null, userName: userName});
 });
 
 //Display's Michael's blog
@@ -139,7 +140,7 @@ app.get("/:userFile((michael|judi)sfile)", isLoggedIn, function(req, res) {
 });
 
 //Creates a blog
-app.post("/blog", isLoggedIn, function(req, res) {
+app.post("/:user(michael|judi)", isLoggedIn, function(req, res) {
     var title = req.body.title;
     var body = req.body.body;
     var time = req.body.time;
@@ -153,6 +154,18 @@ app.post("/blog", isLoggedIn, function(req, res) {
             console.log(err);
         } else {
             console.log(newlyCreated);
+        }
+    });
+});
+
+//Gets the latest post by Michael or Judi
+app.get("/:user(michael|judi)/latest", function(req, res){
+    var userName = req.params.user;
+    blog.findOne({"author.username": userName}).sort({time: 'desc'}).exec(function(err, blog) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render(req.params.user + "sWriter", {blog: blog});
         }
     });
 });
