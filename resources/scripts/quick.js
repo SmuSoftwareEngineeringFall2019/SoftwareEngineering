@@ -20293,13 +20293,14 @@ function checkSave() {
 }
 
 //Publish current session to database
-//Publish current session to database
 function publish() {
     localStorage.removeItem(wasSaved);
     localStorage.removeItem(localPost);
     var title = document.getElementById("title").value;
     var body = document.getElementById("userText").value;
     var time = Date.now();
+    var user = document.getElementById("username").innerHTML;
+    user = JSON.parse(user);
 
     //When published, Save locally as most recently saved copy
     var localCopy = {title: document.getElementById("title").value,
@@ -20314,10 +20315,10 @@ function publish() {
 
     console.log(data);
     var xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/blog', true);
+    xhttp.open('POST', '/' + user, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send(data);
-    alert("success");
+    window.location.href = "/" + user + "/latest";
 }
 
 //Edit a post on the database
@@ -20348,7 +20349,6 @@ function edit() {
     xhttp.open('put', '/' + user + '/' + blogId, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send(data);
-    alert("success");
 }
 
 //Gets cursor position in the string
