@@ -27,6 +27,7 @@
     <%if (!blog) {%>
 <div class="publishBtnPosition">
     <button onclick="publish()" class="publishBtn">Publish</button></div>
+    <span id="username" hidden><%= JSON.stringify(userName);%></span>
     <%} else {%>
     <button onclick="edit()" class="publishBtn">Submit</button>
     <%}%>
