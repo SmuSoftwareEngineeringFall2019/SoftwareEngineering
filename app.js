@@ -275,14 +275,14 @@ app.get("/login/:user(michael|judi)", function(req, res) {
 //Handles Michael's login
 app.post("/login/michael", passport.authenticate("local",
     {
-        successRedirect: "/michaelsWriter",
+        successRedirect: "/michaelsfile",
         failureRedirect: "/login/michael",
         failureFlash: true}));
 
 //Handles Judi's login
 app.post("/login/judi", passport.authenticate("local",
     {
-        successRedirect: "/judisWriter",
+        successRedirect: "/judisfile",
         failureRedirect: "/login/judi",
         failureFlash: true}));
 
