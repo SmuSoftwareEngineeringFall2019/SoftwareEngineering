@@ -10,12 +10,14 @@ var curs;
 var start;
 var end;
 
-//Change names of local storage depending on user
-var wasSaved;
-var localPost;
-
 //Var to keep track of whether the last button pushed was a predicted word
 var lastPred = false;
+
+//Mark whether the publish function is being called within the onunload context
+var onClose = false;
+
+//Href of current session
+var writerURL;
 
 //Boards
 var lowerBoard = ["", "", "", "", "",
@@ -2208,7 +2210,6 @@ var dictionary = [
     "ones",
     "latin",
     "multimedia",
-    "tits",
     "avoid",
     "certified",
     "manage",
@@ -5372,7 +5373,6 @@ var dictionary = [
     "doll",
     "ic",
     "podcast",
-    "tit",
     "seasons",
     "peru",
     "interactions",
@@ -19917,60 +19917,38 @@ try {
 //have been made or not.
 function startUp() {
     //Check which user is active
-
-    wasSaved = window.location.href + "WasSaved";
-    localPost = window.location.href + "Local";
-
-    //Check local storage to see if changes were saved
-    try {
-        var check = localStorage.getItem(wasSaved);
-        var oldCopy = localStorage.getItem(localPost);
-        if (JSON.parse(check).state === "no") {
-            //If changes not saved, load in the unsaved work and notify
-            //user
-            document.getElementById("title").value = JSON.parse(oldCopy).title;
-            document.getElementById("userText").value = JSON.parse(oldCopy).body;
-            alert("You made changes during your last visit that weren't saved! Leaving this page again without saving will result in those changes being lost.");
-            localStorage.removeItem(wasSaved);
-            localStorage.removeItem(localPost);
-        }
-    } catch (e) {
-    }
-    //Store Current state into local storage
-    var localCopy = {title: document.getElementById("title").value,
-        body: document.getElementById("userText").value
-    };
-    localStorage.setItem(localPost, JSON.stringify(localCopy));
     getCursor();
     predict();
     updateBoard();
 
+    //Set URL of current session
+    writerURL = window.location.href;
     //Listen for when a key is released. Writer works with hardwired keyboard
     //and onscreen keyboard together.
     document.addEventListener('keyup', function (event) {
         getCursor();
         if (focus === "userText") {
-            if (lastPred && (document.getElementById("userText").value.substring(start -1, start) === "." ||
-                    document.getElementById("userText").value.substring(start -1, start) === "!"  ||
-                    document.getElementById("userText").value.substring(start -1, start) === "?" ||
-                    document.getElementById("userText").value.substring(start -1, start) === "," ||
-                    document.getElementById("userText").value.substring(start -1, start) === "\"" ||
-                    document.getElementById("userText").value.substring(start -1, start) === "'" )) {
-            //A single letter is added
-            //Add the word to the textarea
-            var nextString = document.getElementById(focus).value;
-            //Using cursor location, determine where the letter is to be added
-            var first = nextString.substring(0, start - 2);
-            var last = nextString.substring(end -1, nextString.length);
+            if (lastPred && (document.getElementById("userText").value.substring(start - 1, start) === "." ||
+                    document.getElementById("userText").value.substring(start - 1, start) === "!" ||
+                    document.getElementById("userText").value.substring(start - 1, start) === "?" ||
+                    document.getElementById("userText").value.substring(start - 1, start) === "," ||
+                    document.getElementById("userText").value.substring(start - 1, start) === "\"" ||
+                    document.getElementById("userText").value.substring(start - 1, start) === "'")) {
+                //A single letter is added
+                //Add the word to the textarea
+                var nextString = document.getElementById(focus).value;
+                //Using cursor location, determine where the letter is to be added
+                var first = nextString.substring(0, start - 2);
+                var last = nextString.substring(end - 1, nextString.length);
 
-            //add the letter
-            document.getElementById(focus).value = first + last;
+                //add the letter
+                document.getElementById(focus).value = first + last;
             }
             updateStack();
-            predict();
-            updateBoard();
-            lastPred = false;
         }
+        predict();
+        updateBoard();
+        lastPred = false;
     });
 }
 
@@ -19992,7 +19970,7 @@ function addWord(word) {
             //If a period is being pressed and predict was last used, remove
             //space.
             if ((word === "." || word === "!" || word === "?" || word === "," ||
-            word === "\"" || word === "'") && lastPred === true) {
+                    word === "\"" || word === "'") && lastPred === true) {
                 start = start - 1;
             }
             //A single letter is added
@@ -20268,63 +20246,36 @@ function checkField(num) {
 //On close, check if the current data is the same as the most recent save.
 //If not, Save it locally as well as indicator saying it was not saved.
 function checkSave() {
-    var notSave = {state: "no"};
-    var yesSave = {state: "yes"};
-    try {
-        var save = localStorage.getItem(localPost);
-    } catch (e) {
-    }
-    ;
-    //If it is saved, do nothing
-    if (document.getElementById("title").value === JSON.parse(save).title &&
-            document.getElementById("userText").value === JSON.parse(save).body)
-    {
-        localStorage.setItem(wasSaved, JSON.stringify(yesSave));
-        return;
+    if (writerURL === "http://ugdev.cs.smu.ca:3000/michaelsWriter" ||
+            writerURL === "http://ugdev.cs.smu.ca:3000/judisWriter") {
+        onClose = true;
+        publish();
     } else {
-        //Else save locally
-        var localCopy = {title: document.getElementById("title").value,
-            body: document.getElementById("userText").value
-        };
-        localStorage.setItem(localPost, JSON.stringify(localCopy));
-        localStorage.setItem(wasSaved, JSON.stringify(notSave));
-        return;
+        edit();
     }
 }
-
 //Publish current session to database
 function publish() {
-    localStorage.removeItem(wasSaved);
-    localStorage.removeItem(localPost);
     var title = document.getElementById("title").value;
     var body = document.getElementById("userText").value;
     var time = Date.now();
     var user = document.getElementById("username").innerHTML;
     user = JSON.parse(user);
-
-    //When published, Save locally as most recently saved copy
-    var localCopy = {title: document.getElementById("title").value,
-        body: document.getElementById("userText").value
-    };
-    localStorage.setItem(localPost, JSON.stringify(localCopy));
-
     title = encodeURIComponent(title);
     body = encodeURIComponent(body);
-
     data = 'title=' + title + '&body=' + body + "&time=" + time;
-
     console.log(data);
     var xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/' + user, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send(data);
-    window.location.href = "/" + user + "/latest";
+    if (!onClose) {
+        window.location.href = "/" + user + "/latest";
+    }
 }
 
 //Edit a post on the database
 function edit() {
-     localStorage.removeItem(wasSaved);
-    localStorage.removeItem(localPost);
     var title = document.getElementById("title").value;
     var body = document.getElementById("userText").value;
     var time = Date.now();
@@ -20332,18 +20283,9 @@ function edit() {
     blogId = JSON.parse(blogId);
     var user = document.getElementById('userId').innerHTML;
     user = JSON.parse(user);
-
-    //When published, Save locally as most recently saved copy
-    var localCopy = {title: document.getElementById("title").value,
-        body: document.getElementById("userText").value
-    };
-    localStorage.setItem(localPost, JSON.stringify(localCopy));
-
     title = encodeURIComponent(title);
     body = encodeURIComponent(body);
-
     data = 'title=' + title + '&body=' + body + "&time=" + time;
-
     console.log(blogId);
     var xhttp = new XMLHttpRequest();
     xhttp.open('put', '/' + user + '/' + blogId, true);
@@ -20351,9 +20293,9 @@ function edit() {
     xhttp.send(data);
 }
 
+
 //Gets cursor position in the string
 function getCursor() {
-
     curs = document.getElementById(focus);
     start = curs.selectionStart;
     end = curs.selectionEnd;
