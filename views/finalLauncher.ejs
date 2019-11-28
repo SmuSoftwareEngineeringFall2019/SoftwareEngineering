@@ -22,6 +22,20 @@
 
 <body>
 
+<style>
+/*remove scrolls on M.Edge*/
+.left {
+overflow-y: hidden;
+overflow-x: hidden;
+}
+
+.right {
+overflow-y: hidden;
+overflow-x: hidden;
+}
+
+</style>
+
   <div class="split left">
     <div class="centered" style="width: 950px;">
 
@@ -29,6 +43,7 @@
       <!-- lets put the navbar in the header tag -->
       <!-- create a div container to keep elements in the middle to prevent them from
      shifting to the edge of the webpage -->
+
       <header>
         <div class="container">
           <div id="homepage">
@@ -36,6 +51,7 @@
           <!--nav-->
         </div>
       </header>
+
 
 
       <!-- END HEADER -->
@@ -60,13 +76,11 @@
 
         <!--START MIKES LOGO HERE -->
 
-        <!-- now we want to place the large judi logo in a section tag seperate from the header -->
         <center>
           <section id="landingPageLogo">
-
             <!-- because we want the logo to be in the center, place the logo in a div container -->
             <div class="container">
-              <h1>
+          <h1>
            <img src="Mikes Media/mikesFullName.png"
            alt="mike" class="mikeLogo" style ="width: 110%;" >
          </h1>
@@ -84,12 +98,26 @@
       <!--ENTER BUTTON HERE -->
       <section id="enter">
         <div class="enterBtn">
-          <a href="/login/michael">
+          <a href="/michaelsfile">
         <button type="button" class="btn" id="myInput">Enter</button>
       </a></div>
       </section>
 
       <!--END ENTER BUTTON-->
+
+
+
+      <!-- Go to Blogs Page Button -->
+     <footer> 
+        <div class="homepage">
+          <a href="michael">
+       <button type="button" class="homepageBtn" id="myInput" style="">Go To Blogs</button>
+     </a></div>
+    </footer>
+      <!-- End Go To Blogs Page Button -->
+
+
+
 
     </div>
   </div>
@@ -128,14 +156,16 @@
         <!--START Judy LOGO HERE -->
 
         <!-- now we want to place the large judi logo in a section tag seperate from the header -->
+
+
+
+
+
+
         <center>
           <section id="JudisLandingPageLogo">
-
-            <!-- because we want the logo to be in the center, place the logo in a div container -->
-            <div class="container">
-              <h1><img src="Judis Media/judiLogoWithoutWelcomeBackText.png" alt="judi" class="judiLogo" style ="width: 90%;" >
-        </h1>
-            </div>
+            <!-- place the logo in a div container -->
+         <h1><img src="Judis Media/judiLogoWithWelcomeBack.png" alt="judi" class="center-fit" style ="width: 90%;" ></h1>  
           </section>
         </center>
       </div>
@@ -145,12 +175,27 @@
       <!--ENTER BUTTON HERE -->
       <section id="enter">
         <div class="judisEnterBtn">
-          <a href="login/judi">
+          <a href="judisfile">
        <button type="button" class="judisBtn" id="myInput">Enter</button>
      </a></div>
       </section>
 
       <!--END ENTER BUTTON-->
+
+      <!-- Go to Blogs Page Button -->
+    <div>
+        <div class="homepage">
+          <a href="judi">
+       <button type="button" class="homepageBtn"  style="">Go To Blogs</button>
+     </a></div>
+    </div>
+      <!-- End Go To Blogs Page Button -->
+
+    
+
+
+
+
     </div>
   </div>
 
