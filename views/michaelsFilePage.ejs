@@ -13,10 +13,9 @@
     <!-- jquery library added to fix "$ not defined" error -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-    function publish(){
-    var publishedBtn = document.getElementById("myonoffswitch");
-    var blogId = document.getElementById('blogId').innerHTML;
-    blogId = JSON.parse(blogId);
+    function publish(blogId){
+    var publishedBtn = document.getElementById(JSON.stringify(blogId));
+    
     if(publishedBtn.checked) {
       published = true;
     } else {
@@ -85,11 +84,13 @@
       <div class="toggleBtn">
         <div class="onoffswitch">
           <%if(blog.published == true){%>
-          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked onclick="publish()">
-          <label class="onoffswitch-label" for="myonoffswitch"></label>
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" 
+          id="<%= JSON.stringify(blog._id);%>" checked onclick="publish(<%= JSON.stringify(blog._id);%>)">
+          <label class="onoffswitch-label" for="<%= JSON.stringify(blog._id);%>"></label>
           <%} else{%>
-          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" unchecked onclick="publish()">
-          <label class="onoffswitch-label" for="myonoffswitch"></label>
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" 
+          id="<%= JSON.stringify(blog._id);%>" unchecked onclick="publish(<%= JSON.stringify(blog._id);%>)">
+          <label class="onoffswitch-label" for="<%= JSON.stringify(blog._id);%>"></label>
           <%};%>
         </div>
       </div>
