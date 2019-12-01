@@ -20249,7 +20249,10 @@ function checkSave() {
     if (writerURL === "http://ugdev.cs.smu.ca:3000/michaelswriter" ||
             writerURL === "http://ugdev.cs.smu.ca:3000/judisWriter") {
         onClose = true;
-        publish();
+        if (document.getElementById("title") !== "" &&
+                document.getElementById("userText") !== "") {
+            publish();
+        }
     } else {
         edit();
     }
