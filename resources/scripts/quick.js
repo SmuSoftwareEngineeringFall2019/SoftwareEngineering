@@ -20246,7 +20246,7 @@ function checkField(num) {
 //On close, check if the current data is the same as the most recent save.
 //If not, Save it locally as well as indicator saying it was not saved.
 function checkSave() {
-    if (writerURL === "http://ugdev.cs.smu.ca:3000/michaelsWriter" ||
+    if (writerURL === "http://ugdev.cs.smu.ca:3000/michaelswriter" ||
             writerURL === "http://ugdev.cs.smu.ca:3000/judisWriter") {
         onClose = true;
         publish();
