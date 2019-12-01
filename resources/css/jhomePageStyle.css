@@ -45,15 +45,12 @@ header nav {
   background-color: inherit;
   padding: 5px 30px 5px 20px;
   font-size: 30px;
-  cursor: pointer;
   display: inline-block;
   color:white;
 }
 .button:hover {
-  background: teal;
-  color: black;
-  border-radius: 5px;
-}
+  }
+
 /*-----------------END BLOG TEXT----------------------------*/
 
 /*-----------------SEARCH BUTTON----------------------------*/
@@ -132,6 +129,31 @@ header nav {
   margin: 20px -20px 40px -10px;
 }
 
+/*---------Media query for post header - mobile device---------*/
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+.post-header {
+width: 50px;
+  }
+}
+
+/*---------End Media query for post header --------------------*/
+
+
+
+
+
+
+
+
+
+
+
 .post-description {
   padding-left: 50px;
   text-align: center;
@@ -139,17 +161,57 @@ header nav {
   font-family: 'Calibri';
 }
 
+
+/*---------Media query for post description - mobile device---------*/
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+.post-description {
+width: 50px;
+text-align: center;
+font-size:12px;
+  }
+}
+
+/*---------End Media query for post description --------------------*/
+
 .posts .post-title {
   color: black;
   font-family: 'Courier New';
   text-align: center;
 }
+
+/*Media Query for Post Title (grey container) - IPhones - Portrait and Landscape */
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+.posts .post-title {
+  color: black;
+  font-weight: normal;
+  font-family: 'Courier New';
+  text-align: center;
+  font-size: 12px;
+  }
+}
+
+
+/*End Media Query for Post Title (grey container) - IPhones - Portrait and Landscape */
+
 /*-----------------END BLOG POST STYLING DISPLAY-----------------------------*/
 
 /* ----------SLIDER FOR BLOGS--------------------------------------*/
 .post-slider {
-
-  position: relative; /*this is to help position the next and prev icons*/
+position: relative;
 }
 
 /*Edit tile in post slider*/
@@ -166,21 +228,65 @@ header nav {
   position: absolute;
   top: 50%;
   right: 30px;
-  font-size: 2em;
+  font-size: 5em;
   color: #006D5B;
   cursor: pointer;
-
 }
+/*Media Query for Next Button - IPhones - Portrait and Landscape */
+
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+.post-slider .next {
+    position: absolute;
+    right: 30px;
+    font-size: 2.5em;
+    color: teal;
+    cursor: pointer;
+    transform: translateX(30px);
+   }
+}
+/*End Media Query for Next Button - IPhones*/
+
+
 .post-slider .prev {
   /*we want the icon to be about 50% south of the slider itself*/
   position: absolute;
   top: 50%;
   left: 30px;
-  font-size: 2em;
-  color: #006D5B;
+  font-size: 5em;
+  color: teal;
   cursor: pointer; /*when user hovers over the button, the pointer will change to
   indicate that the button is clickable*/
 }
+
+/*Media Query for Previous Button - IPhones - Portrait and Landscape */
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+.post-slider .prev {
+    position: absolute;
+    left: 30px;
+    font-size: 2.5em;
+    color: teal;
+    cursor: pointer;
+    transform: translateX(-30px);
+ }
+}
+
+/*End Media Query for Previous Button - IPhones*/
 
 .post-slider .post-wrapper {
   padding: 10px 0px 10px 0px;
@@ -191,6 +297,8 @@ header nav {
    container post slider, hide it.*/
   text-align:center
 }
+
+
 /*style each post/blog that is inside the post wrapper*/
 .post-slider .post-wrapper .posts {
   /*lets give the blogs a background color*/
@@ -215,19 +323,49 @@ header nav {
   cursor: pointer;
 }
 /* ---------END SLIDER FOR BLOGS--------------------------------------*/
-/*-------------------SCROLL BAR Customize------------------*/
-body::-webkit-scrollbar {
-    width: 1em;
+
+/*-------------------READ ME BUTTON LINK ------------------------------------*/
+.readMe {
+border-radius: 30px;
+background-color: teal;
+color: white;
+font-family: 'Courier';
+width: 40%;
+height: 60%;
+font-size: 30px;
+transform:translateY(-10px);
 }
 
-body::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+.readMe:hover{
+cursor:pointer;
 }
 
-body::-webkit-scrollbar-thumb {
-  background-color: teal;
-  outline: 1px solid black;
-  border-radius: 30px;
-}
 
-/*************** SCROLLBAR BASE CSS ***************/
+/*Media Query for Iphones - Portrait and Landscape */
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+.readMe {
+border-radius: 30px;
+background-color: teal;
+color: white;
+font-family: 'Courier';
+width: 40%;
+height: 60%;
+font-size: 8px;
+transform:translateY(-10px);
+
+ }
+}
+/*End Media Query for Iphones*/
+
+
+
+
+/*------------------END READ ME BUTTON LINK --------------------------------*/
+
