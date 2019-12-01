@@ -2,7 +2,7 @@
 <html>
 <head>
   <!-- ************ ADD NAME WITH JS/EJS ************** -->
-  <title id="title">/name/ | Homepage</title>
+  <title id="title">Michael's | Homepage</title>
 
   <!-- responsive webpage requires, viewport, content attribute -->
   <meta charset="utf-8">
@@ -24,17 +24,9 @@
   <header>
     <!-- RETURN TO HOMEPAGE (THIS PAGE)-->
     <div id="homepage">
-      <a href ="mikesHomePage.ejs">
-      <button class="button blogBtn">blogs |</button>
-    </a>
+      <p class="button blogBtn">blogs |</p>
     </div>
-    <!-- SEARCH ALL PUBLISHED BLOGS (NOT IMPLEMENTED YET)-->
-    <div class="search-box">
-      <input class="search-txt" type="text" placeholder="Search for Blogs...">
-      <a class="search-btn" href="#"></a>
-      <i id="searchIcon" class="fa fa-search"></i>
-    </div>
-  </header>
+     </header>
 
   <!--  LOGO AND BACKGROUND IMAGE -->
   <div id="blogHeader">
@@ -48,10 +40,8 @@
       <h1 class="slider-title" style="font-size: 35px; ">Recent Posts</h1>
       <!---insert the previous and forward icons from font awesome--->
       <i class="fa fa-chevron-left prev"></i>
-      <!--here prev will be used in the css file to style it.-->
       <i class="fa fa-chevron-right next"></i>
-      <!--here next will be used in the css file to style it.-->
-      <!---The Slider--------------->
+           <!---The Slider--------------->
       <!--This is where you will call the blogs to be displayed -->
       <div class="post-wrapper">
         <!--this is the class called in the inline js above---->
@@ -70,7 +60,9 @@
                     function for the paragraph that will retrieve the full blog from the server
                     ------------------->
               <p><%=blog.body%></p>
-              <a href="/michael/<%=blog._id%>">Read Me</a>
+             </div>
+             <div>
+              <a href="/michael/<%=blog._id%>"><button class="readMe">Read Me</button></a>
             </div>
           </section>
         </div>
