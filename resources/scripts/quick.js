@@ -19923,6 +19923,7 @@ function startUp() {
 
     //Set URL of current session
     writerURL = window.location.href;
+
     //Listen for when a key is released. Writer works with hardwired keyboard
     //and onscreen keyboard together.
     document.addEventListener('keyup', function (event) {
@@ -20064,6 +20065,10 @@ function updateBoard() {
         }
         i++;
     }
+    //adjust size of textbox relative to keyboard
+    document.getElementById("userText").style.height =
+            (document.getElementsByClassName("keyboard keyboard--hidden")[0].offsetTop
+                    - document.getElementById("userText").offsetTop - 10) + "px";
 }
 
 //Determine predicted words
