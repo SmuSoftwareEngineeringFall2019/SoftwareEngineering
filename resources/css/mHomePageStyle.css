@@ -1,10 +1,15 @@
 /*Mike's Home Page Style Sheet*/
 
+body {
+font-family: 'Courier';
+
+}
+
 /*-----------NAVBAR----------------*/
 header {
   background: black;
   padding:32px;
-	margin: -8px -8px 0px -8px;
+  margin: -8px -8px 0px -8px;
 
 }
 header ul {
@@ -45,7 +50,7 @@ header nav {
 .blogBtn {
   position:absolute;
   left:10px;
-  top:10px;
+  top:-15px;
 }
 .button {
   font-family: Courier;
@@ -53,81 +58,15 @@ header nav {
   background-color: inherit;
   padding: 5px 30px 5px 20px;
   font-size: 30px;
-  cursor: pointer;
   display: inline-block;
   color:white;
 }
 .button:hover {
-  background:#AC0C0C;
   color: white;
   border-radius: 5px;
 }
 /*-----------------END BLOG TEXT----------------------------*/
 
-/*-----------------SEARCH BUTTON----------------------------*/
-.search-box {
-  position: absolute;
-  top:2px;
-  right:10px;
-  background: black;
-  height: 30px;
-  border-radius: 47px;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.search-box:hover > .search-txt {
-  width: 240px;
-  padding: 7px 0px;
-  height: 30px;
-  color: white;
-
-}
-.search-box:hover > .search-btn {
-  background: #AC0C0C;
-}
-.search-box:hover  {
-  background-color: #AC0C0C;
-}
-.search-btn {
-  color: white;
-  float: right;
-  width: 40px;
-  height: 40px;
-  border-radius: 35%;
-  background: black;
-  display: run-in;
-  justify-content: center;
-  align-items: center;
-  transition: .4s;
-}
-
-.search-txt {
-  border:none;
-  background: none;
-  outline: none;
-  float: left;
-  transform: translate(5px, -5px);
-  color: white;
-  font-size: 25px;
-  transition: 0.4s;
-  line-height: 40px;
-  width:0px;
-  font-family: "Courier New";
-}
-
-#searchIcon {
-  font-size: 1.60em;
-  transform: translate(135%, 30%);
-  color: white;
-}
-
-::placeholder {
-  color: white;
-  opacity: 1;
-  font-family: "Courier New";
-}
-/*-----------------END SEARCH BUTTON----------------------------*/
 
 /*-----------------------ACTUAL BLOG POST STYLING---------------------------*/
 .post-header {
@@ -141,6 +80,21 @@ header nav {
   margin: 20px -20px 40px -10px;
 }
 
+/*---------Media query for post header - mobile device---------*/
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+.post-header {
+width: 50px;
+  }
+}
+
+/*---------End Media query for post header --------------------*/
+
 .post-description {
   padding-left: 50px;
   text-align: center;
@@ -148,17 +102,60 @@ header nav {
   font-family: 'Calibri';
 }
 
+/*---------Media query for post description - mobile device---------*/
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+.post-description {
+width: 50px;
+text-align: center;
+font-size:12px;
+  }
+}
+
+/*---------End Media query for post description --------------------*/
+
+
 .posts .post-title {
   color: black;
   font-family: 'Courier New';
   text-align: center;
 }
+
+
+
+/*Media Query for Post Title (grey container) - IPhones - Portrait and Landscape */
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+.posts .post-title {
+  color: black;
+  font-weight: normal;
+  font-family: 'Courier New';
+  text-align: center;
+  font-size: 12px;
+  }
+}
+
+
+/*End Media Query for Post Title (grey container) - IPhones - Portrait and Landscape */
+
+
 /*-----------------END BLOG POST STYLING DISPLAY-----------------------------*/
 
 /* ----------SLIDER FOR BLOGS--------------------------------------*/
 .post-slider {
-
-  position: relative; /*this is to help position the next and prev icons*/
+  position: relative; 
 }
 
 /*Edit tile in post slider*/
@@ -168,27 +165,79 @@ header nav {
   font-family: Courier;
   color: black;
 }
+
+
 /*Edit icons, they are also in the post-slider*/
 .post-slider .next {
   /*we want the icon to be about 50% south of the slider itself*/
   position: absolute;
   top: 50%;
   right: 30px;
-  font-size: 2em;
+  font-size: 5em;
   color: #AC0C0C;
   cursor: pointer;
 
 }
+
+/*Media Query for Next Button - IPhones - Portrait and Landscape */
+
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+.post-slider .next {
+    position: absolute;
+    right: 30px;
+    font-size: 2.5em;
+    color: #AC0C0C;
+    cursor: pointer;
+    transform: translateX(30px);
+   }
+}
+
+
+
+/*End Media Query for Next Button - IPhones*/
+
 .post-slider .prev {
   /*we want the icon to be about 50% south of the slider itself*/
   position: absolute;
   top: 50%;
   left: 30px;
-  font-size: 2em;
+  font-size: 5em;
   color: #AC0C0C;
   cursor: pointer; /*when user hovers over the button, the pointer will change to
   indicate that the button is clickable*/
 }
+
+/*Media Query for Previous Button - IPhones - Portrait and Landscape */
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+.post-slider .prev {
+    position: absolute;
+    left: 30px;
+    font-size: 2.5em;
+    color: #AC0C0C;
+    cursor: pointer;
+    transform: translateX(-30px);
+ }
+}
+
+/*End Media Query for Previous Button - IPhones*/
+
+
 
 .post-slider .post-wrapper {
   padding: 10px 0px 10px 0px;
@@ -199,6 +248,28 @@ header nav {
    container post slider, hide it.*/
   text-align:center
 }
+
+/*Media Query for Post Wrapper (grey container) - IPhones - Portrait and Landscape */
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+.post-slider .post-wrapper {
+  width: 84%;
+
+ }
+}
+
+
+
+/*End Media Query for Post Wrapper - IPhones*/
+
+
 /*style each post/blog that is inside the post wrapper*/
 .post-slider .post-wrapper .posts {
   /*lets give the blogs a background color*/
@@ -212,6 +283,8 @@ header nav {
   border-radius: 5px; /*round edges*/
   box-shadow: 1rem 1rem 1rem -1rem #a0a0a033;
 }
+
+
 /* you need to add sme padding to the blog paragraph */
 .post-slider .post-wrapper .posts .post-description {
   height: 130px;
@@ -223,3 +296,88 @@ header nav {
   cursor: pointer;
 }
 /* ---------END SLIDER FOR BLOGS--------------------------------------*/
+
+
+/*-------------------READ ME BUTTON LINK ------------------------------------*/
+.readMe {
+border-radius: 30px;
+background-color: #AC0C0C;
+color: white;
+font-family: 'Courier';
+width: 40%;
+height: 60%;
+font-size: 30px;
+transform:translateY(-10px);
+}
+
+.readMe:hover {
+cursor:pointer;
+}
+
+/*Media Query for Ipads - Portrait and Landscape */
+
+/* ----------- iPad 3, 4 and Pro 9.7" ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+.readMe {
+border-radius: 30px;
+background-color: #AC0C0C;
+color: white;
+font-family: 'Courier';
+width: 40%;
+height: 60%;
+font-size: 30px;
+transform:translateY(-10px);4
+
+  }
+}
+/*End Media Query for Ipads*/
+
+
+
+/*Media Query for Iphones - Portrait and Landscape */
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+.readMe {
+border-radius: 30px;
+background-color: #AC0C0C;
+color: white;
+font-family: 'Courier';
+width: 40%;
+height: 60%;
+font-size: 8px;
+transform:translateY(-10px);
+
+ }
+}
+/*End Media Query for Iphones*/
+
+
+
+
+
+/*------------------END READ ME BUTTON LINK --------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
