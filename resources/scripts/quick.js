@@ -10,6 +10,9 @@ var curs;
 var start;
 var end;
 
+//Height of textarea
+var textareaSize;
+
 //Var to keep track of whether the last button pushed was a predicted word
 var lastPred = false;
 
@@ -25,7 +28,7 @@ var lowerBoard = ["", "", "", "", "",
     "[", "]", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "delword",
     "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "\'", "enter",
     ";", "\\", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/",
-    "space"
+    "Undo", "space", "Redo"
 ];
 
 var capBoard = ["", "", "", "", "",
@@ -33,7 +36,7 @@ var capBoard = ["", "", "", "", "",
     "{", "}", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "delword",
     "caps", "A", "S", "D", "F", "G", "H", "J", "K", "L", "\"", "enter",
     ":", "|", "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?",
-    "space"
+    "Undo", "space", "Redo"
 ];
 
 //Predictive words
@@ -11532,7 +11535,7 @@ var dictionary = [
     "affirmative",
     "keynote",
     "mos",
-    "didnt",
+    "didn't",
     "classrooms",
     "planted",
     "petitioner",
@@ -13627,7 +13630,7 @@ var dictionary = [
     "cassettes",
     "urges",
     "sophie",
-    "doesnt",
+    "doesn't",
     "tiff",
     "cnc",
     "refrigeration",
@@ -19912,11 +19915,8 @@ try {
     currentStack = [""];
 }
 
-//Function run onload. Check if changes were saved and react accordingly,
-//Store current blog into local storage to determine whether changes
-//have been made or not.
+
 function startUp() {
-    //Check which user is active
     getCursor();
     predict();
     updateBoard();
@@ -19924,11 +19924,23 @@ function startUp() {
     //Set URL of current session
     writerURL = window.location.href;
 
+//Autosave every 30 seconds
+    var periodicSave = setInterval(myTimer, 30000);
+
+    function myTimer() {
+        if (writerURL !== "http://ugdev.cs.smu.ca:3000/michaelswriter" &&
+                writerURL !== "http://ugdev.cs.smu.ca:3000/judiswriter") {
+            edit();
+        }
+        ;
+    }
     //Listen for when a key is released. Writer works with hardwired keyboard
     //and onscreen keyboard together.
     document.addEventListener('keyup', function (event) {
         getCursor();
         if (focus === "userText") {
+            //If last word was predicted and the next thing pressed is
+            //a punctuation, remove the space after the word
             if (lastPred && (document.getElementById("userText").value.substring(start - 1, start) === "." ||
                     document.getElementById("userText").value.substring(start - 1, start) === "!" ||
                     document.getElementById("userText").value.substring(start - 1, start) === "?" ||
@@ -20066,9 +20078,8 @@ function updateBoard() {
         i++;
     }
     //adjust size of textbox relative to keyboard
-    document.getElementById("userText").style.height =
-            (document.getElementsByClassName("keyboard keyboard--hidden")[0].offsetTop
-                    - document.getElementById("userText").offsetTop - 10) + "px";
+    textareaSize = document.getElementsByClassName("keyboard keyboard--hidden")[0].offsetTop - document.getElementById("userText").offsetTop - 10;
+    document.getElementById("userText").style.height = textareaSize + "px";
 }
 
 //Determine predicted words
@@ -20236,7 +20247,28 @@ function updateStack() {
         currentStack.push(document.getElementById("userText").value);
     }
 }
+function navigation(direction) {
 
+    var x = document.getElementById("userText");
+    switch (direction) {
+        case 0:
+            //Scroll down one window
+            x.scrollTo(0, x.scrollTop + textareaSize);
+            break;
+        case 1:
+            //Scroll up one window
+            x.scrollTo(0, x.scrollTop - textareaSize);
+            break;
+        case 2:
+            //Scroll to bottom
+            x.scrollTo(0, 1000000000);
+            break;
+        case 3:
+            //Scroll to top
+            x.scrollTo(0, 0);
+            break;
+    }
+}
 //Check which field is active and where the cursor is after clicking it
 function checkField(num) {
 
@@ -20252,18 +20284,66 @@ function checkField(num) {
 //If not, Save it locally as well as indicator saying it was not saved.
 function checkSave() {
     if (writerURL === "http://ugdev.cs.smu.ca:3000/michaelswriter" ||
-            writerURL === "http://ugdev.cs.smu.ca:3000/judisWriter") {
+            writerURL === "http://ugdev.cs.smu.ca:3000/judiswriter") {
         onClose = true;
-        if (document.getElementById("title").value !== "" &&
+        //If either the title or body is not empty, publish
+        if (document.getElementById("title").value !== "" ||
                 document.getElementById("userText").value !== "") {
             publish();
         }
     } else {
         edit();
     }
+    console.log("Changes saved");
 }
 //Publish current session to database
 function publish() {
+    //If title is empty, fill it with todays date
+    if (document.getElementById("title").value === "") {
+        var date;
+        var month = new Date().getMonth();
+        var day = new Date().getDate();
+        var year = new Date().getFullYear();
+        switch (month) {
+            case 0:
+                date = "January";
+                break;
+            case 1:
+                date = "February";
+                break;
+            case 2:
+                date = "March";
+                break;
+            case 3:
+                date = "April";
+                break;
+            case 4:
+                date = "May";
+                break;
+            case 5:
+                date = "June";
+                break;
+            case 6:
+                date = "July";
+                break;
+            case 7:
+                date = "August";
+                break;
+            case 8:
+                date = "September";
+                break;
+            case 9:
+                date = "October";
+                break;
+            case 10:
+                date = "November";
+                break;
+            case 11:
+                date = "December";
+                break;
+        }
+        document.getElementById("title").value = date + " " + day + " " + year;
+    }
     var title = document.getElementById("title").value;
     var body = document.getElementById("userText").value;
     var time = Date.now();
@@ -20284,6 +20364,52 @@ function publish() {
 
 //Edit a post on the database
 function edit() {
+    //If title is empty, fill it with todays date
+    if (document.getElementById("title").value === "") {
+        var date;
+        var month = new Date().getMonth();
+        var day = new Date().getDate();
+        var year = new Date().getFullYear();
+        switch (month) {
+            case 0:
+                date = "January";
+                break;
+            case 1:
+                date = "February";
+                break;
+            case 2:
+                date = "March";
+                break;
+            case 3:
+                date = "April";
+                break;
+            case 4:
+                date = "May";
+                break;
+            case 5:
+                date = "June";
+                break;
+            case 6:
+                date = "July";
+                break;
+            case 7:
+                date = "August";
+                break;
+            case 8:
+                date = "September";
+                break;
+            case 9:
+                date = "October";
+                break;
+            case 10:
+                date = "November";
+                break;
+            case 11:
+                date = "December";
+                break;
+        }
+        document.getElementById("title").value = date + " " + day + " " + year;
+    }
     var title = document.getElementById("title").value;
     var body = document.getElementById("userText").value;
     var time = Date.now();
@@ -20300,7 +20426,6 @@ function edit() {
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send(data);
 }
-
 
 //Gets cursor position in the string
 function getCursor() {
@@ -20392,6 +20517,24 @@ const Keyboard = {
                     keyElement.addEventListener("click", () => {
                         this._toggleCapsLock();
                         keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock);
+                    });
+
+                    break;
+                case "Undo":
+                    keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable");
+                    keyElement.innerHTML = "Undo";
+
+                    keyElement.addEventListener("click", () => {
+                        undo();
+                    });
+
+                    break;
+                case "Redo":
+                    keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable");
+                    keyElement.innerHTML = "Redo";
+
+                    keyElement.addEventListener("click", () => {
+                        redo();
                     });
 
                     break;
