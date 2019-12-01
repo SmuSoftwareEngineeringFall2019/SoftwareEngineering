@@ -20249,8 +20249,8 @@ function checkSave() {
     if (writerURL === "http://ugdev.cs.smu.ca:3000/michaelswriter" ||
             writerURL === "http://ugdev.cs.smu.ca:3000/judisWriter") {
         onClose = true;
-        if (document.getElementById("title") !== "" &&
-                document.getElementById("userText") !== "") {
+        if (document.getElementById("title").value !== "" &&
+                document.getElementById("userText").value !== "") {
             publish();
         }
     } else {
