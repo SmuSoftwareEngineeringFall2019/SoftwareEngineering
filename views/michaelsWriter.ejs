@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <!-- Author: Dawn Dean + Michael Walton - HTML & CSS -->
-
 <html>
 <head>
   <title>Writer | Start Your Story</title>
@@ -10,25 +9,29 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="/scripts/quick.js"></script>
 </head>
-
-<body onload="startUp()" onunload="checkSave()">
+<div>
+<button class="downBtn" onclick="navigation(0)">Down</button>
+<button class="upBtn" onclick="navigation(1)">Up</button>
+<button class="bottomBtn" onclick="navigation(2)">Bottom</button>
+<button class="topBtn" onclick="navigation(3)">Top</button>
+<body onload="startUp()" onbeforeunload="checkSave()">
+</div>
   <header>
       <%if (!blog) {%>
 <div>
     <input id="title" onclick="checkField(0)" placeholder="Enter Title" style="border-radius: 25px; ">
     <%} else {%>
-    <input id="title" onclick="checkField(0)" value="<%=blog.title%>"> </div>
+    <input id="title" onclick="checkField(0)" placeholder="Enter Title" style="border-radius: 25px;" value="<%=blog.title%>"> </div>
     <%}%>
 
 
     <!-- if blog is not null edit() otherwise publish -->
    
     <%if (!blog) {%>
-<div class="publishBtnPosition">
-    <button onclick="publish()" class="publishBtn">Publish</button></div>
+    <button onclick="publish()" class="publishBtn">Save</button>
     <span id="username" hidden><%= JSON.stringify(userName);%></span>
     <%} else {%>
-    <button onclick="edit()" class="publishBtn">Submit</button>
+    <button onclick="edit()" class="publishBtn">Save</button>
     <%}%>
   </header>
   <!--here i changed the class from your textArea to use-keyboard-input
@@ -37,11 +40,10 @@
 
 <!-- buttons above keyboard here -->
 
- <button onclick="" class="fileBtn" style="transform:translateX(60px);">Files</button>
+ <a href="/michaelsfile"><button onclick="" class="fileBtn" style="transform:translateX(60px);">Files</button></a>
  <!-- <button onclick="" class="blogsBtn" style="transform:translateX(70px);">Blogs</button> -->
  <!-- <button onclick="" class="saveBtn" style="transform:translateX(-30px);">Save</button> -->
  <button id="shareButton" class="shareBtn" style="transform:translateX(-70px);">Share</button>
-
 <!-- end buttons here -->
 
 
@@ -85,7 +87,7 @@
   <textarea autofocus placeholder="Share Your Story..." class="use-keyboard-input" onclick="checkField(1)" id="userText"
 style="border-radius: 10px;"></textarea>
   <%} else {%>
-  <textarea autofocus class="use-keyboard-input" onclick="checkField(1)" 
+  <textarea autofocus placeholder="Write With Your Heart..." class="use-keyboard-input" onclick="checkField(1)" 
   id="userText"><%=blog.body%></textarea>
   <span id="blogId" hidden>
   <%= JSON.stringify(blog._id);%>
