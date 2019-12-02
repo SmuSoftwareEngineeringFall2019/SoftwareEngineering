@@ -1,75 +1,70 @@
-<!-- blog page when user clicks blog paragraph on slider -->
-<!-- Judi's Login Page -->
+<!-- blog page when user clicks blog paragprah on slider -->
+<!-- Michael's Login Page -->
 <html>
   <head>
-<meta name="description" content="Blog Site for Mike">
-<meta name="keywords" content="web design, Mike's webpage, blog">
-<meta name="author" content="Mike">
+<meta name="description" content="Blog Site for Michael">
+<meta name="keywords" content="web design, Michael's webpage, blog">
+<meta name="author" content="Michael">
 
-<link rel="stylesheet" href="../public/css/jquery.mobile-1.3.1.min.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="scripts/jquery-1.8.3.min.js"></script>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<link rel="stylesheet" type="text/css" href="mikesSingleBlogDisplay.css"/>
+<link rel="stylesheet" type="text/css" href="/css/mHomePageStyle.css"/>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Blog | Mike</title>
-  </head>
+    <title>Micheal's Blog | <%=blog.title%></title>
 
-<body>
-<div class="logoContainer">
-  <div class="centered" style="width: 100%">
-
-    <!-------------------------- HEADER HERE ------------------------------>
-     <!-- lets put the navbar in the header tag -->
-     <!-- create a div container to keep elements in the middle to prevent them from
-     shifting to the edge of the webpage -->
-     <!-- begin navbar -->
-     <style>
-     /*NAVBAR*/
-header {
-  background: black;
-  color: white;
-  min-height: 10%;
-  overflow-x: hidden;
-
-  /* bleeds the header*/
-  margin: -20px -60px 0px -20px;
-  transform: translateY(-120px);
-
-
-}
-body {
-  overflow-x: hidden;
-}
+<style>
 
 .paragraph-container {
  width: 70%;
  height: 50%;
  box-sizing: border-box;
- background: #E8E8E8;
+ background:#f7f2e6;
  border-radius: 30px;
  margin-bottom: 10px;
- border: 1px solid;
+
  padding: 10px;
  box-shadow: 2px 5px 10px #888888;
 }
+/*Customized Scrollbar*/
+/* Chrome, Safari */
+::-webkit-scrollbar {
+width: 15px;
+height: 15px;
+
+}
+::-webkit-scrollbar-track-piece  {
+background-color: #C2D2E4;
+border-radius: 30px;
+}
+::-webkit-scrollbar-thumb:vertical {
+height: 30px;
+background-color: #B21212;
+border-radius: 30px;
+}
+
+/*End Customized Scrollbar*/
      </style>
+  </head>
 
-     <header>
-       <div class= "container">
-         <div id="homepage">
-         </div>
-         <!--nav-->
-       </div>
+<body>
+  <header>
+    <!-- RETURN TO HOMEPAGE (THIS PAGE)-->
+    <div id="homepage">
+      <h1 style="margin: 8px 0 0 25px">
+      <a href="/michael"><button class="button blogBtn" >Michael's Blog</button></a> | 
+      </div>
      </header>
-     <!-- end nav bar -->
 
-</div>
-</div>
+  <!--  LOGO AND BACKGROUND IMAGE -->
+  <div id="blogHeader">
+    <img id="logo">
+  </div>
 
 <!-- insert blog in a box  -->
 <!-- insert title, below title insert paragraph -->
@@ -80,25 +75,28 @@ body {
     <!---insert blog div here--->
     <div class="posts" id="posts">
       <section class="post">
-
-          <h2 class="post-title" style="font-size: 50px;"><%=blog.title%></h2>
-
+         <center><h2 class="post-title" style="font-size: 50px;"><%=blog.title%></h2></center>
         <div class="post-description">
           <center>
             <div class="paragraph-container">
-              <p><%=blog.body%></p>
+              <p class ="blogBody"><%=blog.body%></p>
         </div>
       </center>
-
         </div>
-        <a href="/michael/<%=blog._id%>/edit">Update Blog</a>
-        <form action="/michael/<%=blog._id%>?_method=DELETE" method="POST">
-          <br><input type="submit" value="Delete Blog">
-        </form>
-      </section>
+<br>
+
+<center>
+       <div>
+        <!-- share button goes here -->
+ </section>
+</div>
+</center>
+
+
     </div>
 
   </div>
 
 </body>
 </html>
+
