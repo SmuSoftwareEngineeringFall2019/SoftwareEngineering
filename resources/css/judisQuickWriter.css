@@ -28,7 +28,75 @@ textarea{
 overflow-x: hidden;
 }
 
+/*UP + DOWN buttons*/
+.upBtn {
+ position: fixed;
+ bottom: 0px;
+ right: 90px; 
+ z-index:800;
+ width:70px;
+ height:55px;
+ border-radius:15px;
+ font-family: 'Courier New';
+ font-size: 30px;
+ background: gold;
+ color:black;
+ font-weight: bold;
+ transform:translate(-10px, -10px);
 
+}
+.downBtn {
+ position: fixed;
+ bottom: 0px;
+ right: 5px; 
+ z-index:800;
+ width:85px;
+ height:55px;
+ border-radius:15px;
+ font-family: 'Courier New';
+ font-size: 30px;
+ background: gold;
+ color:black;
+ font-weight: bold;
+ transform:translate(-10px, -10px);
+
+}
+/*End UP + DOWN buttons */
+
+/*TOP + BOTTOM buttons*/
+.topBtn {
+ position: fixed;
+ bottom: 0px;
+ right: 300px; 
+ z-index:800;
+ width:70px;
+ height:55px;
+ border-radius:15px;
+ font-family: 'Courier New';
+ font-size: 30px;
+ background: gold;
+ color:black;
+ font-weight: bold;
+ transform:translate(-10px, -10px);
+
+}
+.bottomBtn {
+ position: fixed;
+ bottom: 0px;
+ right: 160px; 
+ z-index:800;
+ width:140px;
+ height:55px;
+ border-radius:15px;
+ font-family: 'Courier New';
+ font-size: 30px;
+ background: gold;
+ color:black;
+ font-weight: bold;
+ transform:translate(-10px, -10px);
+
+}
+/*TOP + BOTTOM buttons */
 
 #author{
   height:2.5rem; 
