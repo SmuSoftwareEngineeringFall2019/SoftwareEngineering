@@ -1,5 +1,6 @@
 body {
   font-family: 'Courier New';
+  font-size: 25px;
   overflow-x: hidden;
 }
 
@@ -36,6 +37,21 @@ header {
 }
 /*-----------end password Text field style---------*/
 
+/*Password field*/
+.password {
+
+width: 20%;
+height:5%; 
+background-color: #CCCCCC;
+font-size: 20px;
+font-family:'Courier New'; 
+border-radius: 20px;"
+
+}
+
+
+/*End password Field*/
+
 /*logInBtn Style*/
 .logInBtn {
 
@@ -51,7 +67,7 @@ header {
   border-radius: 0px;
   text-align: center;
   /*change btn size*/
-  width: 10%;
+  width: 20%;
   resize: both;
   box-shadow: 2px 2px #999;
 
@@ -73,7 +89,7 @@ header {
 /*--------------------------FONT- STYLE JUDI BUTTON---------------------*/
 .logInBtn {
     font-family: 'Courier New';
-    font-size: 100%;
+    font-size: 40px;
 }
 
 /*--------------------------END FONT- STYLE JUDI BUTTON---------------------*/
