@@ -12,34 +12,43 @@
   <script src="/scripts/quick.js"></script>
 </head>
 
-<body onload="startUp()" onunload="checkSave()">
+<div>
+<button class="downBtn" onclick="navigation(0)">Down</button>
+<button class="upBtn" onclick="navigation(1)">Up</button>
+<button class="bottomBtn" onclick="navigation(2)">Bottom</button>
+<button class="topBtn" onclick="navigation(3)">Top</button>
+</div>
+
+
+<body onload="startUp()" onbeforeunload="checkSave()">
+
+</style>
   <header>
     <%if (!blog) {%>
-<div>
     <input id="title" onclick="checkField(0)" placeholder="Enter Title" style="border-radius: 25px; ">
     <%} else {%>
-    <input id="title" onclick="checkField(0)" value="<%=blog.title%>"> </div>
+    <input id="title" onclick="checkField(0)"  placeholder="Enter Title" style="border-radius: 25px;" value="<%=blog.title%>">
     <%}%>
 
-<!-- add a break here -->
+
 
     <!-- if blog is not null edit() otherwise publish -->
    
     <%if (!blog) {%>
 <div class="publishBtnPosition">
-    <button onclick="publish()" class="publishBtn">Publish</button></div>
+    <button onclick="publish()" class="publishBtn" >Publish</button></div>
     <span id="username" hidden><%= JSON.stringify(userName);%></span>
     <%} else {%>
-    <button onclick="edit()" class="publishBtn">Submit</button>
+    <button onclick="edit()" class="publishBtn">Save</button>
     <%}%>
   </header>
 
 
 <!-- buttons above keyboard here -->
-
- <button onclick="" class="fileBtn" style="transform:translateX(30px);">Files</button>
- <button onclick="" class="blogsBtn" style="transform:translateX(70px);">Redo</button>
- <button onclick="" class="saveBtn" style="transform:translateX(-30px);">Undo</button>
+<div>
+<a href="/judisfile"><button onclick="" class="filesBtn" style="transform:translateX(60px);">Files</button></a>
+<!-- <button onclick="" class="blogsBtn" style="transform:translateX(70px);">Redo</button> -->
+<!-- <button onclick="" class="saveBtn" style="transform:translateX(-30px);">Undo</button> -->
  <button id="shareButton" class="shareBtn" style="transform:translateX(-70px);">Share</button>
 </div>
 
@@ -89,7 +98,7 @@
   <textarea autofocus placeholder="Share Your Story..." class="use-keyboard-input" onclick="checkField(1)" id="userText"
 style="border-radius: 10px;"></textarea>
   <%} else {%>
-  <textarea autofocus class="use-keyboard-input" onclick="checkField(1)" 
+  <textarea autofocus placeholder="Share Your Story..." class="use-keyboard-input" onclick="checkField(1)" 
   id="userText"><%=blog.body%></textarea>
   <span id="blogId" hidden>
   <%= JSON.stringify(blog._id);%>
