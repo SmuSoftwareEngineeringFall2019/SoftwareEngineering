@@ -1,8 +1,9 @@
 /*CSS for landing page*/
 body {
   font-family: 'Courier New';
-
+  font-size: 25px;
   overflow-x: hidden;
+  overflow-y:hidden;
 }
 
 #MikesLandingPageLogo {
@@ -53,7 +54,7 @@ header {
   border-radius: 0px;
   text-align: center;
   /*change btn size*/
-  width: 10%;
+  width: 20%;
   resize: both;
   box-shadow: 2px 2px #999;
 
@@ -72,13 +73,13 @@ header {
 }
 /* -------------------------END ENTER BUTTON FOR JUDI----------------- */
 
-/*--------------------------FONT- STYLE JUDI BUTTON---------------------*/
+/*--------------------------FONT- STYLE MICHAEL BUTTON---------------------*/
 .logInBtn {
     font-family: 'Courier New';
-    font-size: 100%;
+    font-size: 40px;
 }
 
-/*--------------------------END FONT- STYLE JUDI BUTTON---------------------*/
+/*--------------------------END FONT- STYLE MICHAEL BUTTON---------------------*/
 /*end logInBtn Style*/
 
 /*-------------------------------- BIRDS-----------------------*/
