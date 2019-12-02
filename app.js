@@ -345,7 +345,7 @@ function isLoggedIn(req, res, next){
 function checkOwnerShip(req, res, next){
     if(req.isAuthenticated()){
         blog.findById(req.params.id, function(err, foundBlog){
-            if(err){
+            if(err || foundBlog == null){
                 req.flash("error", "Blog not found");
                 res.redirect("back");
             } else {
