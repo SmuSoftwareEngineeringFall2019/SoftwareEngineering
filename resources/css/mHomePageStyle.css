@@ -8,7 +8,7 @@ font-family: 'Courier';
 /*-----------NAVBAR----------------*/
 header {
   background: black;
-  padding:32px;
+  padding:11px;
   margin: -8px -8px 0px -8px;
 
 }
@@ -16,11 +16,6 @@ header ul {
   /*Unordered lists have padding by default*/
   margin:0;
   padding: 0;
-}
-header nav {
-  float:right;
-  margin-top:10px;
-
 }
 /*------------END   NAVBAR -------------------*/
 
@@ -42,15 +37,21 @@ header nav {
   display:block;
   margin:auto;
   width:60%;
-  height: 60%;
+  
 }
 /* ----------END IMAGE UNDER HEADER--------------------------------------*/
+/* -------- Single blog view ------------ */
+
+.blogBody {
+  font-size: 25px;
+  text-align: left;
+}
 
 /*--------------------BLOG TEXT BUTTON --------------*/
 .blogBtn {
   position:absolute;
   left:10px;
-  top:-15px;
+  top:10px;
 }
 .button {
   font-family: Courier;
@@ -58,13 +59,17 @@ header nav {
   background-color: inherit;
   padding: 5px 30px 5px 20px;
   font-size: 30px;
+  cursor: pointer;
   display: inline-block;
   color:white;
 }
+
 .button:hover {
+  background: #AC0C0C;
   color: white;
   border-radius: 5px;
 }
+
 /*-----------------END BLOG TEXT----------------------------*/
 
 
@@ -100,6 +105,10 @@ width: 50px;
   text-align: center;
   color: black;
   font-family: 'Calibri';
+}
+
+.post-description .p {
+
 }
 
 /*---------Media query for post description - mobile device---------*/
