@@ -88,7 +88,8 @@ var User = mongoose.model("User", userSchema);
 */
 app.use(session({
     secret: "I attend Saint Mary's University",
-    //store: new mongoStore({mongooseConnection: mongoose.connection}),
+    store: new mongoStore({mongooseConnection: mongoose.connection, 
+    ttl: 5 * 365 * 24 * 60 * 60}),  //5 years
     resave: false,
     saveUninitialized: false
 }));
@@ -125,7 +126,7 @@ app.get("/:writer((michael|judi)swriter)", isLoggedIn, function(req, res) {
     res.render(path, {blog: null, userName: userName});
 });
 
-//Display's Michael's blog
+//Displays Michael or Judi's file page
 app.get("/:userFile((michael|judi)sfile)", isLoggedIn, function(req, res) {
     var userName = req.user.username;
     blog.find({"author.username": userName}, function(err, blogs) {
@@ -136,7 +137,7 @@ app.get("/:userFile((michael|judi)sfile)", isLoggedIn, function(req, res) {
             path = path.replace(/file/, "FilePage");
             res.render(path, { blogsVar: blogs });
         }
-    });
+    }).sort({time: 'desc'});
 });
 
 //Creates a blog
