@@ -24,7 +24,8 @@
   <header>
     <!-- RETURN TO HOMEPAGE (THIS PAGE)-->
     <div id="homepage">
-      <p class="button blogBtn">blogs |</p>
+      <h1 style="margin: 8px 0 0 25px">
+      <a href="/michael"><button class="button blogBtn" >Michael's Blog</button></a> | 
     </div>
      </header>
 
@@ -44,7 +45,7 @@
            <!---The Slider--------------->
       <!--This is where you will call the blogs to be displayed -->
       <div class="post-wrapper">
-        <!--this is the class called in the inline js above---->
+        <!--this is the class called in the inline js above -->
 
         <!---insert blog div here--->
         <% blogsVar.forEach(function(blog){ %>
@@ -54,12 +55,7 @@
               <h2 class="post-title"><%=blog.title%></h2>
             </header>
             <div class="post-description">
-              <!----When the user clicks the paragraph (or maybe a
-                     button beneath the paragraphthe box will expand with the
-                    full blog on the same page, so we need an onclick javascript
-                    function for the paragraph that will retrieve the full blog from the server
-                    ------------------->
-              <p><%=blog.body%></p>
+                <p><%=blog.body%></p>
              </div>
              <div>
               <a href="/michael/<%=blog._id%>"><button class="readMe">Read Me</button></a>
