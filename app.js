@@ -180,7 +180,7 @@ app.get("/:user(michael|judi)", function(req, res) {
         } else {
             res.render(req.params.user + "sHomePage", { blogsVar: blogs });
         }
-    });
+    }).sort({time: 'desc'});
 });
 
 //Displays one of Michael or Judi's blogs
