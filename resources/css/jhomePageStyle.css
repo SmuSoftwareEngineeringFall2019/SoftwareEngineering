@@ -33,6 +33,13 @@ header nav {
 
 /* ----------END IMAGE UNDER HEADER--------------------------------------*/
 
+/* -------- Single blog view ------------ */
+
+.blogBody {
+  font-size: 25px;
+  text-align: left;
+}
+
 /*--------------------BLOG TEXT BUTTON --------------*/
 .blogBtn {
   position:absolute;
@@ -49,73 +56,12 @@ header nav {
   color:white;
 }
 .button:hover {
-  }
+  background: teal;
+  color: white;
+  border-radius: 5px;
+}
 
 /*-----------------END BLOG TEXT----------------------------*/
-
-/*-----------------SEARCH BUTTON----------------------------*/
-.search-box {
-  position: absolute;
-  top:2px;
-  right:10px;
-  background: black;
-  height: 30px;
-  border-radius: 47px;
-  padding: 10px;
-  margin-top: 10px;
-}
-.search-box:hover > .search-txt {
-  width: 240px;
-  padding: 7px 0px;
-  height: 30px;
-  color: teal;
-
-}
-.search-box:hover > .search-btn {
-  background: white;
-}
-.search-box:hover  {
-  background-color: white;
-}
-.search-btn {
-  color: black;
-  float: right;
-  width: 40px;
-  height: 40px;
-  border-radius: 35%;
-  background: black;
-  display: run-in;
-  justify-content: center;
-  align-items: center;
-  transition: .4s;
-}
-
-.search-txt {
-  border:none;
-  background: none;
-  outline: none;
-  float: left;
-  transform: translate(5px, -5px);
-  color: teal;
-  font-size: 25px;
-  transition: 0.4s;
-  line-height: 40px;
-  width:0px;
-  font-family: 'Courier New';
-}
-
-#searchIcon {
-  font-size: 1.60em;
-  transform: translate(135%, 30%);
-  color: white;
-}
-
-::placeholder {
-  color: black;
-  opacity: 1;
-  font-family: "Courier New";
-}
-/*-----------------END SEARCH BUTTON----------------------------*/
 
 /*-----------------------ACTUAL BLOG POST STYLING---------------------------*/
 .post-header {
@@ -124,7 +70,7 @@ header nav {
   font-family: 'Courier New';
   text-align: center; /*center blog titles*/
   padding-top: 30px;
-  padding-bottom: 0px;
+  padding-bottom: 0px
   min-height: 70px;
   margin: 20px -20px 40px -10px;
 }
@@ -333,7 +279,7 @@ font-family: 'Courier';
 width: 40%;
 height: 60%;
 font-size: 30px;
-transform:translateY(-10px);
+transform:translateY(-40px);
 }
 
 .readMe:hover{
