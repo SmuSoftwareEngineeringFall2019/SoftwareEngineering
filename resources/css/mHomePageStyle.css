@@ -105,6 +105,7 @@ width: 50px;
   text-align: center;
   color: black;
   font-family: 'Calibri';
+  overflow: hidden;
 }
 
 .post-description .p {
