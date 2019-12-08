@@ -299,23 +299,6 @@ app.get("/logout", function(req, res) {
 //========
 
 //Function that checks if michael is logged in
-// function isLoggedIn(req, res, next){
-//     var page;
-//     var pattern = /^\/michael.*/;
-
-//     if(req.isAuthenticated()){
-//         return next();
-//     }
-//     if(pattern.test(req.path)) {
-//         page = "michael";
-//     } else {
-//         page = "judi";
-//     }
-//     req.flash("error", "You must be logged in to do that");
-//     res.redirect("/login/" + page);
-// }
-
-//Function that checks if michael is logged in
 function isLoggedIn(req, res, next){
     var page;
     var michaelPattern = /^\/michael.*/;
