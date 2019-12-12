@@ -1,4 +1,11 @@
-/*Author: Dawn Dean*/
+/* 
+
+Primary Authors: Dawn Dean, Michael Walton
+
+Updates:
+lovingly tweeked by Nikolaus 
+
+*/
 
 /*File page*/
 /*CSS for Files Page*/
@@ -215,12 +222,12 @@ padding: 5px;
 .fileTitle {
 float:left;
 padding-top: 10px;
-padding-left: 25px;
+padding-left: 15px;
 font-size: 25px;
 color: black;
 font-style:italic;
 font-family: 'Arial';
-
+width: 200px;
 }
 
 

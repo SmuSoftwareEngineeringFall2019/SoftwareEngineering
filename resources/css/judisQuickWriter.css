@@ -1,3 +1,18 @@
+/*
+judisQuickWriter.css
+
+Primary Author: Dawn Dean
+
+Update History:
+Nov 10 2019:  Seamus MacInnes:  Update size and positioning of keys for responsiveness
+Dec 2 2019:   Seamus MacInnes:  Position and style of navigation buttons
+
+Dec 1 2019: Jacob Vincent: Update Overflow on textBox
+Nov 24 2019: Jacob Vincent: added .keyboard__key--more-wide and .keyboard__key--predict-wide
+Edits to Up/Down buttons
+
+
+*/
 header{
   text-align:center; 
 }
@@ -9,6 +24,7 @@ body{
  background-color:#b8e3d5;
 
 }
+/*this doesn't exist anymore*/
 #logo{
   content:url("../Writer Media/quickWriter.png");
   display:block;
@@ -28,75 +44,39 @@ textarea{
 overflow-x: hidden;
 }
 
-/*UP + DOWN buttons*/
-.upBtn {
+/* Navigation buttons*/
+
+.upBtn, .downBtn, .topBtn, .bottomBtn{
  position: fixed;
- bottom: 0px;
- right: 90px; 
- z-index:800;
- width:70px;
- height:55px;
+ right: 5px; 
+ height:45px;
+ width:110px;
  border-radius:15px;
  font-family: 'Courier New';
- font-size: 30px;
+ font-size: 25px;
  background: gold;
  color:black;
  font-weight: bold;
- transform:translate(-10px, -10px);
-
+ z-index:800;
 }
 .downBtn {
- position: fixed;
- bottom: 0px;
- right: 5px; 
- z-index:800;
- width:85px;
- height:55px;
- border-radius:15px;
- font-family: 'Courier New';
- font-size: 30px;
- background: gold;
- color:black;
- font-weight: bold;
- transform:translate(-10px, -10px);
-
+ bottom:5px;
 }
-/*End UP + DOWN buttons */
-
-/*TOP + BOTTOM buttons*/
-.topBtn {
- position: fixed;
- bottom: 0px;
- right: 300px; 
- z-index:800;
- width:70px;
- height:55px;
- border-radius:15px;
- font-family: 'Courier New';
- font-size: 30px;
- background: gold;
- color:black;
- font-weight: bold;
- transform:translate(-10px, -10px);
-
+.upBtn {
+ bottom:55px;
 }
 .bottomBtn {
- position: fixed;
- bottom: 0px;
- right: 160px; 
- z-index:800;
- width:140px;
- height:55px;
- border-radius:15px;
- font-family: 'Courier New';
- font-size: 30px;
- background: gold;
- color:black;
- font-weight: bold;
- transform:translate(-10px, -10px);
-
+ bottom:105px;
 }
-/*TOP + BOTTOM buttons */
+.topBtn {
+ bottom:155px; 
+}
+.upBtn:hover, .downBtn:hover, .topBtn:hover, .bottomBtn:hover{
+transform: scale(1.2);
+background: black;
+color: white;
+cursor: pointer;
+}
 
 #author{
   height:2.5rem; 
@@ -190,6 +170,12 @@ overflow-x: hidden;
   width: calc(36vw + 20px);
   max-width: calc(60vh + 20px);
 }
+.keyboard__key--more-wide {
+  min-width:calc(10rem + 10px);
+  width: calc(24vw + 10px);
+  max-width: calc(40vh + 10px);
+}
+
 .keyboard__key--predict-wide {
   min-width:calc(9rem + 12px);
   width: calc(21vw + 12px);

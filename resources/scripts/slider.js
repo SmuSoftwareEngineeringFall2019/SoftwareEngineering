@@ -1,3 +1,10 @@
+/*
+
+Primary Author: Ken Wheeler (Google) + Dawn Dean
+
+*/
+
+
 $(document).ready(function() {
 $('.menu-toggle').on('click', function () {
 $('.nav').toggleClass('showing');
