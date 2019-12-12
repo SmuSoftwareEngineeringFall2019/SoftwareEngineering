@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <!-- blog page when user clicks 'Read Me' on slider -->
 <!-- Author: Michael Walton - HTML & CSS -->
+<!-- Additional functionality: Seamus MacInnes -->
 <html>
-  <head>
+<head>
 <meta name="description" content="Blog Site for Michael">
 <meta name="keywords" content="web design, Michael's webpage, blog">
 <meta name="author" content="Michael">
@@ -49,17 +51,20 @@ border-radius: 30px;
 }
 
 /*End Customized Scrollbar*/
-     </style>
-  </head>
+</style>
+</head>
 
 <body>
-  <header>
-    <!-- RETURN TO HOMEPAGE (THIS PAGE)-->
-    <div id="homepage">
-      <h1 style="margin: 8px 0 0 25px">
-      <a href="/michael"><button class="button blogBtn" >Michael's Blog</button></a> | 
-      </div>
-     </header>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0"></script>
+
+<header>
+<!-- RETURN TO HOMEPAGE (THIS PAGE)-->
+  <div id="homepage">
+    <h1 style="margin: 8px 0 0 25px">
+    <a href="/michael"><button class="button blogBtn" >Michael's Blog</button></a> | 
+  </div>
+</header>
 
   <!--  LOGO AND BACKGROUND IMAGE -->
   <div id="blogHeader">
@@ -75,28 +80,27 @@ border-radius: 30px;
     <!---insert blog div here--->
     <div class="posts" id="posts">
       <section class="post">
-         <center><h2 class="post-title" style="font-size: 50px;"><%=blog.title%></h2></center>
-        <div class="post-description">
-          <center>
-            <div class="paragraph-container">
-              <p class ="blogBody"><%=blog.body%></p>
-        </div>
-      </center>
-        </div>
-<br>
+         <center><h2 class="post-title" style="font-size: 50px;"><%=blog.title%>
 
-<center>
-       <div>
-        <!-- share button goes here -->
- </section>
-</div>
-</center>
+<!-- share button -->
 
+<div class="fb-share-button" data-href="http://ugdev.cs.smu.ca:3000/michael/<%=blog._id%>" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ugdev.cs.smu.ca:3000/michael/<%=blog._id%>" class="fb-xfbml-parse-ignore">Share</a></div>
 
+<!-- end share button -->
+</h2></center>
+      <div class="post-description">
+        <center>
+          <div class="paragraph-container">
+            <p class ="blogBody"><%=blog.body%></p>
+          </div>
+        </center>
+      </div>
+      <br>
+      <div>
+        </section>
+      </div>
     </div>
-
   </div>
-
 </body>
 </html>
 

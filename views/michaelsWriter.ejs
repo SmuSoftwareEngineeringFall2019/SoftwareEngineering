@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<!-- Author: Dawn Dean + Michael Walton - HTML & CSS -->
+<!-- Author: Dawn Dean JS for Share Button on the writer ----->
+<!-- Author: Michael Walton - HTML & CSS -->
 <html>
 <head>
   <title>Writer | Start Your Story</title>
@@ -9,13 +10,17 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="/scripts/quick.js"></script>
 </head>
+
 <div>
 <button class="downBtn" onclick="navigation(0)">Down</button>
 <button class="upBtn" onclick="navigation(1)">Up</button>
 <button class="bottomBtn" onclick="navigation(2)">Bottom</button>
 <button class="topBtn" onclick="navigation(3)">Top</button>
 </div>
+
 <body onload="startUp()" onbeforeunload="checkSave()">
+
+
   <header>
       <%if (!blog) {%>
 <div>
@@ -43,9 +48,13 @@
  <a href="/michaelsfile"><button onclick="" class="fileBtn" style="transform:translateX(60px);">Files</button></a>
  <!-- <button onclick="" class="blogsBtn" style="transform:translateX(70px);">Blogs</button> -->
  <!-- <button onclick="" class="saveBtn" style="transform:translateX(-30px);">Save</button> -->
- <button id="shareButton" class="shareBtn" style="transform:translateX(-70px);">Share</button>
 <!-- end buttons here -->
 
+
+ <!--button id="shareButton" class="shareBtn" style="transform:translateX(-70px);">Share</button>
+
+<!-- This custom pop up has been disabled because the funcitonality was not able to be implemented.
+     To see Dawn's work, uncomment line 54 -->
 
 <!------- Custom pop up for share button ------------->
 <div id="myModal" class="modal">
@@ -84,10 +93,10 @@
 
 <!----------- end custom pop up --------------->
   <%if (!blog) {%>
-  <textarea autofocus placeholder="Share Your Story..." class="use-keyboard-input" onclick="checkField(1)" id="userText"
+  <textarea autofocus placeholder="Share Your Story..." class="use-keyboard-input" onclick="checkField(1)" onscroll="updateScroll()" id="userText"
 style="border-radius: 10px;"></textarea>
   <%} else {%>
-  <textarea autofocus placeholder="Write With Your Heart..." class="use-keyboard-input" onclick="checkField(1)" 
+  <textarea autofocus placeholder="Write With Your Heart..." class="use-keyboard-input" onclick="checkField(1)" onscroll="updateScroll()"
   id="userText"><%=blog.body%></textarea>
   <span id="blogId" hidden>
   <%= JSON.stringify(blog._id);%>

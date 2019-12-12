@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Author: Dawn Dean - HTML & CSS -->
+<!-- Author: Dawn Dean HTML + CSS + Javascript for Share Button Only----->
 <html>
 
 <head>
@@ -18,7 +18,6 @@
 <button class="bottomBtn" onclick="navigation(2)">Bottom</button>
 <button class="topBtn" onclick="navigation(3)">Top</button>
 </div>
-
 
 <body onload="startUp()" onbeforeunload="checkSave()">
 
@@ -39,7 +38,7 @@
     <button onclick="publish()" class="publishBtn" >Publish</button></div>
     <span id="username" hidden><%= JSON.stringify(userName);%></span>
     <%} else {%>
-    <button onclick="edit()" class="publishBtn">Save</button>
+    <button onclick="edit()" class="publishBtn">Submit</button>
     <%}%>
   </header>
 
@@ -49,12 +48,14 @@
 <a href="/judisfile"><button onclick="" class="filesBtn" style="transform:translateX(60px);">Files</button></a>
 <!-- <button onclick="" class="blogsBtn" style="transform:translateX(70px);">Redo</button> -->
 <!-- <button onclick="" class="saveBtn" style="transform:translateX(-30px);">Undo</button> -->
- <button id="shareButton" class="shareBtn" style="transform:translateX(-70px);">Share</button>
+ <!--button id="shareButton" class="shareBtn" style="transform:translateX(-70px);">Share</button>
 </div>
 
 <!-- end buttons here -->
 
-
+<!-- This custom pop up has been disabled because the funcitonality was not able to be implemented.
+     To see Dawn's work, uncomment line 51 -->
+     
 <!------- Custom pop up for share button ------------->
 <div id="myModal" class="modal">
 <div class="container">
@@ -95,10 +96,10 @@
 <!----------- end custom pop up --------------->
 
   <%if (!blog) {%>
-  <textarea autofocus placeholder="Share Your Story..." class="use-keyboard-input" onclick="checkField(1)" id="userText"
+  <textarea autofocus placeholder="Share Your Story..." class="use-keyboard-input" onclick="checkField(1)" onscroll="updateScroll()" id="userText"
 style="border-radius: 10px;"></textarea>
   <%} else {%>
-  <textarea autofocus placeholder="Share Your Story..." class="use-keyboard-input" onclick="checkField(1)" 
+  <textarea autofocus placeholder="Share Your Story..." class="use-keyboard-input" onclick="checkField(1)" onscroll="updateScroll()" 
   id="userText"><%=blog.body%></textarea>
   <span id="blogId" hidden>
   <%= JSON.stringify(blog._id);%>
