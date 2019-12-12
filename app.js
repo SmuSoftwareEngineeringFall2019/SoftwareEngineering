@@ -1,3 +1,5 @@
+//Author: Ali Al-Karam
+
 //========
 //Initial Setup
 //========
@@ -25,11 +27,11 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 //Server Credentials
-var user = '';
-var password = '';
+var user = 'group2';
+var password = 'escapeCORN58';
 var host = 'localhost';
 var port = '27017';
-var database = '';
+var database = 'group2';
 var connectionString = 'mongodb://' + user + ':' + password + '@' + host +
     ':' + port + '/' + database;
 
@@ -236,7 +238,7 @@ app.delete("/:user(michael|judi)/:id", checkOwnerShip, function(req, res) {
         if(err){
             res.redirect("/" + req.params.user);
         } else {
-            res.redirect("/" + req.params.user + "sfile);
+            res.redirect("/" + req.params.user + "sfile");
         }
     });
 });
